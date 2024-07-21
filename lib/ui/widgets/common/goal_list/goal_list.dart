@@ -12,11 +12,18 @@ class GoalList extends StackedView<GoalListModel> {
     GoalListModel viewModel,
     Widget? child,
   ) {
-    return const Center(
-      child: Text(
-        'Goal list',
-      ),
-    );
+    return Scaffold(
+        body: const Center(
+          child: Text(
+            'Goal list',
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            viewModel.addGoal();
+          },
+          child: const Icon(Icons.add),
+        ));
   }
 
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:the_task/ui/widgets/common/goal_list/goal_list.dart';
 import 'package:the_task/ui/widgets/common/progress/progress.dart';
-import 'package:the_task/ui/widgets/common/the_task/the_task.dart';
+import 'package:the_task/ui/widgets/common/task_current/task_current.dart';
 
 import 'home_viewmodel.dart';
 
@@ -19,11 +19,11 @@ class HomeView extends StackedView<HomeViewModel> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Home Page'),
+          title: const Text('The Task'),
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Goals'),
-              Tab(text: 'Tasks'),
+              Tab(text: 'Current Task'),
               Tab(text: 'Progress'),
             ],
           ),
@@ -31,7 +31,7 @@ class HomeView extends StackedView<HomeViewModel> {
         body: const TabBarView(
           children: [
             GoalList(),
-            TheTask(),
+            TaskCurrent(),
             Progress(),
           ],
         ),
@@ -42,5 +42,6 @@ class HomeView extends StackedView<HomeViewModel> {
   @override
   HomeViewModel viewModelBuilder(
     BuildContext context,
-  ) => HomeViewModel();
+  ) =>
+      HomeViewModel();
 }

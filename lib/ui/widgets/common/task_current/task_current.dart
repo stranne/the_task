@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'the_task_model.dart';
+import 'task_current_model.dart';
 
-class TheTask extends StackedView<TheTaskModel> {
-  const TheTask({super.key});
+class TaskCurrent extends StackedView<TaskCurrentModel> {
+  const TaskCurrent({super.key});
 
   @override
   Widget builder(
     BuildContext context,
-    TheTaskModel viewModel,
+    TaskCurrentModel viewModel,
     Widget? child,
   ) {
     return const Center(
       child: Text(
-        'The task',
+        'Task Current',
       ),
     );
   }
 
   @override
-  TheTaskModel viewModelBuilder(
+  TaskCurrentModel viewModelBuilder(
     BuildContext context,
   ) =>
-      TheTaskModel();
+      TaskCurrentModel();
 }
