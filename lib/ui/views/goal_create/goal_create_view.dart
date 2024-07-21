@@ -17,7 +17,9 @@ class GoalCreateView extends StackedView<GoalCreateViewModel> {
       appBar: AppBar(
         title: const Text('Create Goal'),
       ),
-      body: const GoalForm.blank(),
+      body: GoalForm.blank(
+        onSubmit: viewModel.create,
+      ),
     );
   }
 

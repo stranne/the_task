@@ -8,7 +8,8 @@
 import 'package:flutter/material.dart' as _i6;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i7;
+import 'package:stacked_services/stacked_services.dart' as _i8;
+import 'package:the_task/models/goal_model.dart' as _i7;
 import 'package:the_task/ui/views/goal_create/goal_create_view.dart' as _i4;
 import 'package:the_task/ui/views/goal_edit/goal_edit_view.dart' as _i5;
 import 'package:the_task/ui/views/home/home_view.dart' as _i2;
@@ -71,8 +72,9 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i5.GoalEditView: (data) {
+      final args = data.getArgs<GoalEditViewArguments>(nullOk: false);
       return _i6.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i5.GoalEditView(),
+        builder: (context) => _i5.GoalEditView(key: args.key, goal: args.goal),
         settings: data,
       );
     },
@@ -85,7 +87,34 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i7.NavigationService {
+class GoalEditViewArguments {
+  const GoalEditViewArguments({
+    this.key,
+    required this.goal,
+  });
+
+  final _i6.Key? key;
+
+  final _i7.Goal goal;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "goal": "$goal"}';
+  }
+
+  @override
+  bool operator ==(covariant GoalEditViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key && other.goal == goal;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ goal.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i8.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -128,14 +157,17 @@ extension NavigatorStateExtension on _i7.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToGoalEditView([
+  Future<dynamic> navigateToGoalEditView({
+    _i6.Key? key,
+    required _i7.Goal goal,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.goalEditView,
+        arguments: GoalEditViewArguments(key: key, goal: goal),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -184,14 +216,17 @@ extension NavigatorStateExtension on _i7.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithGoalEditView([
+  Future<dynamic> replaceWithGoalEditView({
+    _i6.Key? key,
+    required _i7.Goal goal,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.goalEditView,
+        arguments: GoalEditViewArguments(key: key, goal: goal),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
