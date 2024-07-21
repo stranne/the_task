@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/models/task_current_state.dart';
+import 'package:the_task/ui/widgets/common/task_current_active/task_current_active.dart';
+import 'package:the_task/ui/widgets/common/task_current_creating/task_current_creating.dart';
+import 'package:the_task/ui/widgets/common/task_current_none/task_current_none.dart';
+import 'package:the_task/ui/widgets/common/task_current_waiting_for_approval/task_current_waiting_for_approval.dart';
 
 import 'task_current_model.dart';
 
@@ -12,11 +17,16 @@ class TaskCurrent extends StackedView<TaskCurrentModel> {
     TaskCurrentModel viewModel,
     Widget? child,
   ) {
-    return const Center(
-      child: Text(
-        'Task Current',
-      ),
-    );
+    switch (viewModel.state) {
+      case TaskCurrentState.none:
+        return const TaskCurrentNone();
+      case TaskCurrentState.creating:
+        return const TaskCurrentCreating();
+      case TaskCurrentState.waitingForApproval:
+        return const TaskCurrentWaitingForApproval();
+      case TaskCurrentState.active:
+        return const TaskCurrentActive();
+    }
   }
 
   @override

@@ -15,10 +15,9 @@ class GoalFormModel extends FormViewModel {
       return;
     }
 
-    final goal = originalGoal == null 
-      ? Goal(title: titleValue!) 
-      : (originalGoal
-        ..title = titleValue!);
+    final goal = originalGoal == null
+        ? Goal(title: titleValue!)
+        : (originalGoal..title = titleValue!);
     _onSubmit(goal);
   }
 

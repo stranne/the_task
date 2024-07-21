@@ -60,7 +60,7 @@ class GoalForm extends StackedView<GoalFormModel> with $GoalForm {
   @override
   void onViewModelReady(GoalFormModel viewModel) {
     syncFormWithViewModel(viewModel);
-    
+
     viewModel.clearForm();
 
     if (goal != null) {

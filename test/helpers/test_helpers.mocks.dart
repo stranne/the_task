@@ -14,6 +14,7 @@ import 'package:the_task/models/goal.dart' as _i9;
 import 'package:the_task/objectbox.g.dart' as _i2;
 import 'package:the_task/services/goal_service.dart' as _i8;
 import 'package:the_task/services/store_service.dart' as _i10;
+import 'package:the_task/services/task_current_service.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -697,31 +698,34 @@ class MockGoalService extends _i1.Mock implements _i8.GoalService {
       ) as int);
 
   @override
-  void create(_i9.Goal? goal) => super.noSuchMethod(
+  _i6.Future<void> createAsync(_i9.Goal? goal) => (super.noSuchMethod(
         Invocation.method(
-          #create,
+          #createAsync,
           [goal],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  void update(_i9.Goal? goal) => super.noSuchMethod(
+  _i6.Future<void> updateAsync(_i9.Goal? goal) => (super.noSuchMethod(
         Invocation.method(
-          #update,
+          #updateAsync,
           [goal],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
-  void delete(_i9.Goal? goal) => super.noSuchMethod(
+  _i6.Future<void> deleteAsync(_i9.Goal? goal) => (super.noSuchMethod(
         Invocation.method(
-          #delete,
+          #deleteAsync,
           [goal],
         ),
-        returnValueForMissingStub: null,
-      );
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
 
   @override
   List<_i9.Goal> getAll() => (super.noSuchMethod(
@@ -798,3 +802,9 @@ class MockStoreService extends _i1.Mock implements _i10.StoreService {
         returnValueForMissingStub: _i6.Future<void>.value(),
       ) as _i6.Future<void>);
 }
+
+/// A class which mocks [TaskCurrentService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTaskCurrentService extends _i1.Mock
+    implements _i11.TaskCurrentService {}

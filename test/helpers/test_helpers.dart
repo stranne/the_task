@@ -4,6 +4,7 @@ import 'package:the_task/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:the_task/services/goal_service.dart';
 import 'package:the_task/services/store_service.dart';
+import 'package:the_task/services/task_current_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -14,6 +15,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<GoalService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<StoreService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<TaskCurrentService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -22,6 +24,7 @@ void registerServices() {
   getAndRegisterDialogService();
   getAndRegisterGoalService();
   getAndRegisterStoreService();
+  getAndRegisterTaskCurrentService();
 // @stacked-mock-register
 }
 
@@ -86,6 +89,13 @@ MockStoreService getAndRegisterStoreService() {
   _removeRegistrationIfExists<StoreService>();
   final service = MockStoreService();
   locator.registerSingleton<StoreService>(service);
+  return service;
+}
+
+MockTaskCurrentService getAndRegisterTaskCurrentService() {
+  _removeRegistrationIfExists<TaskCurrentService>();
+  final service = MockTaskCurrentService();
+  locator.registerSingleton<TaskCurrentService>(service);
   return service;
 }
 // @stacked-mock-create
