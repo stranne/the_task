@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/ui/widgets/common/goal_list_item/goal_list_item.dart';
 
 import 'goal_list_model.dart';
 
@@ -13,17 +14,20 @@ class GoalList extends StackedView<GoalListModel> {
     Widget? child,
   ) {
     return Scaffold(
-        body: const Center(
-          child: Text(
-            'Goal list',
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            viewModel.addGoal();
-          },
-          child: const Icon(Icons.add),
-        ));
+      body: ListView.builder(
+        itemCount: viewModel.goals.length,
+        itemBuilder: (context, index) {
+          final goal = viewModel.goals[index];
+          return GoalListItem(goal: goal);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          viewModel.addGoal();
+        },
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 
   @override

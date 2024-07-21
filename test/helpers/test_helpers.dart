@@ -2,6 +2,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:the_task/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:the_task/services/goal_service.dart';
+import 'package:the_task/services/store_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -10,13 +12,17 @@ import 'test_helpers.mocks.dart';
   MockSpec<NavigationService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
-  // @stacked-mock-spec
+  MockSpec<GoalService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<StoreService>(onMissingStub: OnMissingStub.returnDefault),
+// @stacked-mock-spec
 ])
 void registerServices() {
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
-  // @stacked-mock-register
+  getAndRegisterGoalService();
+  getAndRegisterStoreService();
+// @stacked-mock-register
 }
 
 MockNavigationService getAndRegisterNavigationService() {
@@ -69,6 +75,19 @@ MockDialogService getAndRegisterDialogService() {
   return service;
 }
 
+MockGoalService getAndRegisterGoalService() {
+  _removeRegistrationIfExists<GoalService>();
+  final service = MockGoalService();
+  locator.registerSingleton<GoalService>(service);
+  return service;
+}
+
+MockStoreService getAndRegisterStoreService() {
+  _removeRegistrationIfExists<StoreService>();
+  final service = MockStoreService();
+  locator.registerSingleton<StoreService>(service);
+  return service;
+}
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {

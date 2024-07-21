@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
-import 'package:the_task/models/goal_model.dart';
+import 'package:the_task/models/goal.dart';
+import 'package:the_task/ui/common/ui_helpers.dart';
 
 import 'goal_form_model.dart';
 import 'goal_form.form.dart';
@@ -40,9 +41,9 @@ class GoalForm extends StackedView<GoalFormModel> with $GoalForm {
             controller: titleController,
             decoration: const InputDecoration(labelText: 'Title'),
           ),
-          const SizedBox(height: 20),
+          verticalSpaceMedium,
           ElevatedButton(
-            onPressed: viewModel.submit,
+            onPressed: () => viewModel.submit(goal),
             child: Text(_submitButtonLabel),
           ),
         ],
@@ -59,5 +60,11 @@ class GoalForm extends StackedView<GoalFormModel> with $GoalForm {
   @override
   void onViewModelReady(GoalFormModel viewModel) {
     syncFormWithViewModel(viewModel);
+    
+    viewModel.clearForm();
+
+    if (goal != null) {
+      titleController.text = goal!.title;
+    }
   }
 }

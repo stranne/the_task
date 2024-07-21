@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:the_task/models/goal_model.dart';
+import 'package:the_task/models/goal.dart';
 import 'package:the_task/ui/widgets/common/goal_form/goal_form.dart';
 
 import 'goal_edit_viewmodel.dart';
@@ -25,7 +25,7 @@ class GoalEditView extends StackedView<GoalEditViewModel> {
       ),
       body: GoalForm.edit(
         goal: goal,
-        onSubmit: viewModel.save,
+        onSubmit: viewModel.saveAsync,
       ),
     );
   }

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart' as _i6;
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i8;
-import 'package:the_task/models/goal_model.dart' as _i7;
+import 'package:the_task/models/goal.dart' as _i7;
 import 'package:the_task/ui/views/goal_create/goal_create_view.dart' as _i4;
 import 'package:the_task/ui/views/goal_edit/goal_edit_view.dart' as _i5;
 import 'package:the_task/ui/views/home/home_view.dart' as _i2;

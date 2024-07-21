@@ -1,5 +1,5 @@
 import 'package:stacked/stacked.dart';
-import 'package:the_task/models/goal_model.dart';
+import 'package:the_task/models/goal.dart';
 import 'package:the_task/ui/widgets/common/goal_form/goal_form.form.dart';
 
 class GoalFormModel extends FormViewModel {
@@ -10,12 +10,15 @@ class GoalFormModel extends FormViewModel {
   @override
   void setFormStatus() => updateValidationMessage();
 
-  void submit() {
+  void submit(Goal? originalGoal) {
     if (!updateValidationMessage()) {
       return;
     }
 
-    final goal = Goal(title: titleValue!);
+    final goal = originalGoal == null 
+      ? Goal(title: titleValue!) 
+      : (originalGoal
+        ..title = titleValue!);
     _onSubmit(goal);
   }
 
