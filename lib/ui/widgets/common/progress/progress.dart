@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/ui/widgets/common/progress_task_list/progress_task_list.dart';
 
 import 'progress_model.dart';
 
@@ -12,11 +13,7 @@ class Progress extends StackedView<ProgressModel> {
     ProgressModel viewModel,
     Widget? child,
   ) {
-    return const Center(
-      child: Text(
-        'Progress',
-      ),
-    );
+    return const ProgressTaskList();
   }
 
   @override

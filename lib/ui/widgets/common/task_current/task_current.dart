@@ -52,7 +52,7 @@ class TaskCurrent extends StackedView<TaskCurrentModel> {
     Widget Function(Task) builder,
   ) {
     return FutureBuilder(
-        future: viewModel.getTask(),
+        future: viewModel.getTaskAsync(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return builder(snapshot.data as Task);

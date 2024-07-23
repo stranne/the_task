@@ -10,6 +10,7 @@ import 'package:the_task/services/goal_service.dart';
 import 'package:the_task/services/store_service.dart';
 import 'package:the_task/services/task_current_service.dart';
 import 'package:the_task/services/task_state_service.dart';
+import 'package:the_task/services/task_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -28,6 +29,7 @@ import 'package:the_task/services/task_state_service.dart';
     LazySingleton(classType: StoreService),
     LazySingleton(classType: TaskCurrentService),
     LazySingleton(classType: TaskStateService),
+    LazySingleton(classType: TaskService),
 // @stacked-service
   ],
   bottomsheets: [

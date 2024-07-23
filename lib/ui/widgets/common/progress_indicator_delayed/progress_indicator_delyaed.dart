@@ -3,7 +3,8 @@ import 'package:stacked/stacked.dart';
 
 import 'progress_indicator_delyaed_model.dart';
 
-class ProgressIndicatorDelayed extends StackedView<ProgressIndicatorDelayedModel> {
+class ProgressIndicatorDelayed
+    extends StackedView<ProgressIndicatorDelayedModel> {
   final Duration? duration;
 
   const ProgressIndicatorDelayed({

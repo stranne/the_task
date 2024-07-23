@@ -13,4 +13,19 @@ class TaskStateService {
 
   TaskState fromInt(int stateId) =>
       _mappings.entries.singleWhere((entry) => entry.value == stateId).key;
+
+  String toText(TaskState state) {
+    switch (state) {
+      case TaskState.waitingForApproval:
+        return 'Waiting for approval';
+      case TaskState.skipped:
+        return 'Skipped';
+      case TaskState.inProgress:
+        return 'In progress';
+      case TaskState.completed:
+        return 'Completed';
+      case TaskState.abandoned:
+        return 'Abandoned';
+    }
+  }
 }

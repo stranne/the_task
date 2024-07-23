@@ -13,10 +13,12 @@ import 'package:stacked_services/stacked_services.dart' as _i4;
 import 'package:the_task/models/goal.dart' as _i10;
 import 'package:the_task/models/task.dart' as _i3;
 import 'package:the_task/models/task_current_state.dart' as _i13;
+import 'package:the_task/models/task_state.dart' as _i15;
 import 'package:the_task/objectbox.g.dart' as _i2;
 import 'package:the_task/services/goal_service.dart' as _i9;
 import 'package:the_task/services/store_service.dart' as _i11;
 import 'package:the_task/services/task_current_service.dart' as _i12;
+import 'package:the_task/services/task_service.dart' as _i16;
 import 'package:the_task/services/task_state_service.dart' as _i14;
 
 // ignore_for_file: type=lint
@@ -977,4 +979,29 @@ class MockTaskCurrentService extends _i1.Mock
 /// A class which mocks [TaskStateService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTaskStateService extends _i1.Mock implements _i14.TaskStateService {}
+class MockTaskStateService extends _i1.Mock implements _i14.TaskStateService {
+  @override
+  int toInt(_i15.TaskState? state) => (super.noSuchMethod(
+        Invocation.method(
+          #toInt,
+          [state],
+        ),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  _i15.TaskState fromInt(int? stateId) => (super.noSuchMethod(
+        Invocation.method(
+          #fromInt,
+          [stateId],
+        ),
+        returnValue: _i15.TaskState.waitingForApproval,
+        returnValueForMissingStub: _i15.TaskState.waitingForApproval,
+      ) as _i15.TaskState);
+}
+
+/// A class which mocks [TaskService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTaskService extends _i1.Mock implements _i16.TaskService {}
