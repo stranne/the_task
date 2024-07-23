@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/models/task.dart';
 import 'package:the_task/ui/common/ui_helpers.dart';
 
 import 'task_current_active_model.dart';
 
 class TaskCurrentActive extends StackedView<TaskCurrentActiveModel> {
-  const TaskCurrentActive({super.key});
+  final Task task;
+
+  const TaskCurrentActive({
+    super.key,
+    required this.task,
+  });
 
   @override
   Widget builder(
@@ -21,7 +27,7 @@ class TaskCurrentActive extends StackedView<TaskCurrentActiveModel> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(viewModel.task.title),
+          Text(task.title),
           verticalSpaceMedium,
           ElevatedButton(
             onPressed: viewModel.completeAsync,

@@ -21,9 +21,33 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:8682573953419704556",
+      "lastPropertyId": "3:1559883095010077089",
+      "name": "Task",
+      "properties": [
+        {
+          "id": "1:9133441556832250605",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2880774929165668916",
+          "name": "title",
+          "type": 9
+        },
+        {
+          "id": "3:1559883095010077089",
+          "name": "stateId",
+          "type": 6
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:4701322869235160971",
+  "lastEntityId": "2:8682573953419704556",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

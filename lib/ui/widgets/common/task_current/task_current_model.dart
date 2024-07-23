@@ -11,5 +11,5 @@ class TaskCurrentModel extends ReactiveViewModel {
   List<ListenableServiceMixin> get listenableServices => [_taskCurrentService];
 
   TaskCurrentState get state => _taskCurrentService.state;
-  Task? get task => _taskCurrentService.task;
+  Future<Task> getTask() => _taskCurrentService.getTaskAsync();
 }

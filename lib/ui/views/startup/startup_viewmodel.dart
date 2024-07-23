@@ -3,6 +3,7 @@ import 'package:the_task/app/app.locator.dart';
 import 'package:the_task/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:the_task/services/store_service.dart';
+import 'package:the_task/services/task_current_service.dart';
 
 class StartupViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
@@ -20,5 +21,6 @@ class StartupViewModel extends BaseViewModel {
 
   Future initialize() async {
     await locator<StoreService>().init();
+    await locator<TaskCurrentService>().init();
   }
 }

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/models/task.dart';
 import 'package:the_task/ui/common/ui_helpers.dart';
 
 import 'task_current_waiting_for_approval_model.dart';
 
 class TaskCurrentWaitingForApproval
     extends StackedView<TaskCurrentWaitingForApprovalModel> {
-  const TaskCurrentWaitingForApproval({super.key});
+  final Task task;
+
+  const TaskCurrentWaitingForApproval({
+    super.key,
+    required this.task,
+  });
 
   @override
   Widget builder(
@@ -22,7 +28,7 @@ class TaskCurrentWaitingForApproval
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(viewModel.task.title),
+          Text(task.title),
           verticalSpaceMedium,
           ElevatedButton(
             onPressed: viewModel.acceptAsync,

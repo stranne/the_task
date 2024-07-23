@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/models/task.dart';
 import 'package:the_task/models/task_current_state.dart';
+import 'package:the_task/ui/widgets/common/progress_indicator_delayed/progress_indicator_delyaed.dart';
 import 'package:the_task/ui/widgets/common/task_current_active/task_current_active.dart';
 import 'package:the_task/ui/widgets/common/task_current_creating/task_current_creating.dart';
 import 'package:the_task/ui/widgets/common/task_current_none/task_current_none.dart';
@@ -23,9 +25,19 @@ class TaskCurrent extends StackedView<TaskCurrentModel> {
       case TaskCurrentState.creating:
         return const TaskCurrentCreating();
       case TaskCurrentState.waitingForApproval:
-        return const TaskCurrentWaitingForApproval();
+        return buildWithTask(
+          viewModel,
+          (task) => TaskCurrentWaitingForApproval(
+            task: task,
+          ),
+        );
       case TaskCurrentState.active:
-        return const TaskCurrentActive();
+        return buildWithTask(
+          viewModel,
+          (task) => TaskCurrentActive(
+            task: task,
+          ),
+        );
     }
   }
 
@@ -34,4 +46,21 @@ class TaskCurrent extends StackedView<TaskCurrentModel> {
     BuildContext context,
   ) =>
       TaskCurrentModel();
+
+  Widget buildWithTask(
+    TaskCurrentModel viewModel,
+    Widget Function(Task) builder,
+  ) {
+    return FutureBuilder(
+        future: viewModel.getTask(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return builder(snapshot.data as Task);
+          } else {
+            return const Center(
+              child: ProgressIndicatorDelayed(),
+            );
+          }
+        });
+  }
 }

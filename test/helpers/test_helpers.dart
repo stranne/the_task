@@ -5,6 +5,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:the_task/services/goal_service.dart';
 import 'package:the_task/services/store_service.dart';
 import 'package:the_task/services/task_current_service.dart';
+import 'package:the_task/services/task_state_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -16,6 +17,7 @@ import 'test_helpers.mocks.dart';
   MockSpec<GoalService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<StoreService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<TaskCurrentService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<TaskStateService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -25,6 +27,7 @@ void registerServices() {
   getAndRegisterGoalService();
   getAndRegisterStoreService();
   getAndRegisterTaskCurrentService();
+  getAndRegisterTaskStateService();
 // @stacked-mock-register
 }
 
@@ -96,6 +99,13 @@ MockTaskCurrentService getAndRegisterTaskCurrentService() {
   _removeRegistrationIfExists<TaskCurrentService>();
   final service = MockTaskCurrentService();
   locator.registerSingleton<TaskCurrentService>(service);
+  return service;
+}
+
+MockTaskStateService getAndRegisterTaskStateService() {
+  _removeRegistrationIfExists<TaskStateService>();
+  final service = MockTaskStateService();
+  locator.registerSingleton<TaskStateService>(service);
   return service;
 }
 // @stacked-mock-create
