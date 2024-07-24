@@ -11,8 +11,10 @@ import 'package:stacked_services/src/dialog/dialog_service.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
+import '../services/generative_service.dart';
 import '../services/goal_service.dart';
 import '../services/store_service.dart';
+import '../services/task_create_service.dart';
 import '../services/task_current_service.dart';
 import '../services/task_service.dart';
 import '../services/task_state_service.dart';
@@ -36,4 +38,6 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => TaskCurrentService());
   locator.registerLazySingleton(() => TaskStateService());
   locator.registerLazySingleton(() => TaskService());
+  locator.registerLazySingleton(() => GenerativeService());
+  locator.registerLazySingleton(() => TaskCreateService());
 }

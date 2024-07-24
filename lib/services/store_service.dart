@@ -8,7 +8,7 @@ class StoreService {
 
   Store get store => _store;
 
-  Future<void> init() async {
+  Future<void> initAsync() async {
     final dir = await getApplicationDocumentsDirectory();
     _store = Store(
       getObjectBoxModel(),

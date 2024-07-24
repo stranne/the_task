@@ -7,6 +7,7 @@ import 'dart:async' as _i7;
 import 'dart:ui' as _i8;
 
 import 'package:flutter/material.dart' as _i6;
+import 'package:google_generative_ai/google_generative_ai.dart' as _i18;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
 import 'package:stacked_services/stacked_services.dart' as _i4;
@@ -15,8 +16,10 @@ import 'package:the_task/models/task.dart' as _i3;
 import 'package:the_task/models/task_current_state.dart' as _i13;
 import 'package:the_task/models/task_state.dart' as _i15;
 import 'package:the_task/objectbox.g.dart' as _i2;
+import 'package:the_task/services/generative_service.dart' as _i17;
 import 'package:the_task/services/goal_service.dart' as _i9;
 import 'package:the_task/services/store_service.dart' as _i11;
+import 'package:the_task/services/task_create_service.dart' as _i19;
 import 'package:the_task/services/task_current_service.dart' as _i12;
 import 'package:the_task/services/task_service.dart' as _i16;
 import 'package:the_task/services/task_state_service.dart' as _i14;
@@ -808,7 +811,7 @@ class MockStoreService extends _i1.Mock implements _i11.StoreService {
       ) as _i2.Store);
 
   @override
-  _i7.Future<void> init() => (super.noSuchMethod(
+  _i7.Future<void> initAsync() => (super.noSuchMethod(
         Invocation.method(
           #init,
           [],
@@ -999,9 +1002,109 @@ class MockTaskStateService extends _i1.Mock implements _i14.TaskStateService {
         returnValue: _i15.TaskState.waitingForApproval,
         returnValueForMissingStub: _i15.TaskState.waitingForApproval,
       ) as _i15.TaskState);
+
+  @override
+  String toText(_i15.TaskState? state) => (super.noSuchMethod(
+        Invocation.method(
+          #toText,
+          [state],
+        ),
+        returnValue: _i5.dummyValue<String>(
+          this,
+          Invocation.method(
+            #toText,
+            [state],
+          ),
+        ),
+        returnValueForMissingStub: _i5.dummyValue<String>(
+          this,
+          Invocation.method(
+            #toText,
+            [state],
+          ),
+        ),
+      ) as String);
 }
 
 /// A class which mocks [TaskService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTaskService extends _i1.Mock implements _i16.TaskService {}
+class MockTaskService extends _i1.Mock implements _i16.TaskService {
+  @override
+  List<_i3.Task> getAll() => (super.noSuchMethod(
+        Invocation.method(
+          #getAll,
+          [],
+        ),
+        returnValue: <_i3.Task>[],
+        returnValueForMissingStub: <_i3.Task>[],
+      ) as List<_i3.Task>);
+}
+
+/// A class which mocks [GenerativeService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGenerativeService extends _i1.Mock implements _i17.GenerativeService {
+  @override
+  _i18.GenerativeModel get model => (super.noSuchMethod(
+        Invocation.getter(#model),
+        returnValue: _i5.dummyValue<_i18.GenerativeModel>(
+          this,
+          Invocation.getter(#model),
+        ),
+        returnValueForMissingStub: _i5.dummyValue<_i18.GenerativeModel>(
+          this,
+          Invocation.getter(#model),
+        ),
+      ) as _i18.GenerativeModel);
+
+  @override
+  _i7.Future<String> generateAsync(String? prompt) => (super.noSuchMethod(
+        Invocation.method(
+          #generateAsync,
+          [prompt],
+        ),
+        returnValue: _i7.Future<String>.value(_i5.dummyValue<String>(
+          this,
+          Invocation.method(
+            #generateAsync,
+            [prompt],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<String>.value(_i5.dummyValue<String>(
+          this,
+          Invocation.method(
+            #generateAsync,
+            [prompt],
+          ),
+        )),
+      ) as _i7.Future<String>);
+}
+
+/// A class which mocks [TaskCreateService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTaskCreateService extends _i1.Mock implements _i19.TaskCreateService {
+  @override
+  _i7.Future<_i3.Task> createAsync() => (super.noSuchMethod(
+        Invocation.method(
+          #createAsync,
+          [],
+        ),
+        returnValue: _i7.Future<_i3.Task>.value(_FakeTask_1(
+          this,
+          Invocation.method(
+            #createAsync,
+            [],
+          ),
+        )),
+        returnValueForMissingStub: _i7.Future<_i3.Task>.value(_FakeTask_1(
+          this,
+          Invocation.method(
+            #createAsync,
+            [],
+          ),
+        )),
+      ) as _i7.Future<_i3.Task>);
+}

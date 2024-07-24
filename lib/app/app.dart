@@ -11,6 +11,8 @@ import 'package:the_task/services/store_service.dart';
 import 'package:the_task/services/task_current_service.dart';
 import 'package:the_task/services/task_state_service.dart';
 import 'package:the_task/services/task_service.dart';
+import 'package:the_task/services/generative_service.dart';
+import 'package:the_task/services/task_create_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -30,6 +32,8 @@ import 'package:the_task/services/task_service.dart';
     LazySingleton(classType: TaskCurrentService),
     LazySingleton(classType: TaskStateService),
     LazySingleton(classType: TaskService),
+    LazySingleton(classType: GenerativeService),
+    LazySingleton(classType: TaskCreateService),
 // @stacked-service
   ],
   bottomsheets: [

@@ -5,8 +5,14 @@ import 'package:the_task/models/task_current_state.dart';
 import 'package:the_task/models/task_state.dart';
 import 'package:the_task/objectbox.g.dart';
 import 'package:the_task/services/store_service.dart';
+import 'package:the_task/services/task_create_service.dart';
+import 'package:the_task/services/task_state_service.dart';
 
 class TaskCurrentService with ListenableServiceMixin {
+  static final _waitingForApprovalId =
+      TaskStateService.mappings[TaskState.waitingForApproval]!;
+  static final _inProgressId = TaskStateService.mappings[TaskState.inProgress]!;
+
   Store get _store => locator<StoreService>().store;
 
   Future<void> init() async {
@@ -34,10 +40,12 @@ class TaskCurrentService with ListenableServiceMixin {
 
   TaskCurrentState get state => _state;
   Future<Task?> getTaskOrNullAsync() async {
-    assert(state != TaskCurrentState.none);
-
-    final query =
-        _store.box<Task>().query(Task_.stateId.lessOrEqual(3)).build();
+    final query = _store
+        .box<Task>()
+        .query(Task_.stateId
+            .equals(_waitingForApprovalId)
+            .or(Task_.stateId.equals(_inProgressId)))
+        .build();
     final task = await query.findUniqueAsync();
 
     return task;
@@ -56,14 +64,8 @@ class TaskCurrentService with ListenableServiceMixin {
 
   Future<void> create() async {
     state = TaskCurrentState.creating;
+    final task = await locator<TaskCreateService>().createAsync();
 
-    await Future.delayed(const Duration(seconds: 1));
-
-    // TODO generate task
-    final task = Task(
-      stateId: 1,
-      title: 'Task created at ${DateTime.now()}',
-    );
     await _store.box<Task>().putAsync(task);
     state = TaskCurrentState.waitingForApproval;
   }
