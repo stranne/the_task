@@ -6,8 +6,11 @@ class GenerativeService {
     apiKey: const String.fromEnvironment("GEMININE_API_KEY"),
   );
 
-  Future<String> generateAsync(String prompt) async {
-    final content = [Content.text(prompt)];
+  Future<String> generateAsync(String systemPrompt, String userPrompt) async {
+    final content = [
+      Content.system(systemPrompt),
+      Content.text(userPrompt),
+    ];
     final response = await model.generateContent(
       content,
       generationConfig: GenerationConfig(

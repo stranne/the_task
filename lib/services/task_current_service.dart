@@ -15,7 +15,7 @@ class TaskCurrentService with ListenableServiceMixin {
 
   Store get _store => locator<StoreService>().store;
 
-  Future<void> init() async {
+  Future<void> initAsync() async {
     final task = await getTaskOrNullAsync();
     switch (task?.state) {
       case TaskState.waitingForApproval:
@@ -62,7 +62,7 @@ class TaskCurrentService with ListenableServiceMixin {
     return task;
   }
 
-  Future<void> create() async {
+  Future<void> createAsync() async {
     state = TaskCurrentState.creating;
     final task = await locator<TaskCreateService>().createAsync();
 
@@ -70,39 +70,39 @@ class TaskCurrentService with ListenableServiceMixin {
     state = TaskCurrentState.waitingForApproval;
   }
 
-  Future<void> skip() async {
+  Future<void> skipAsync() async {
     assert(state == TaskCurrentState.waitingForApproval);
 
-    _updateTaskState(TaskState.skipped);
+    await _updateTaskStateAsync(TaskState.skipped);
 
-    await create();
+    await createAsync();
   }
 
-  Future<void> accept() async {
+  Future<void> acceptAsync() async {
     assert(state == TaskCurrentState.waitingForApproval);
 
-    _updateTaskState(TaskState.inProgress);
+    await _updateTaskStateAsync(TaskState.inProgress);
 
     state = TaskCurrentState.active;
   }
 
-  Future<void> abandon() async {
+  Future<void> abandonAsync() async {
     assert(state == TaskCurrentState.active);
 
-    _updateTaskState(TaskState.abandoned);
+    await _updateTaskStateAsync(TaskState.abandoned);
 
-    await create();
+    await createAsync();
   }
 
-  Future<void> complete() async {
+  Future<void> completeAsync() async {
     assert(state == TaskCurrentState.active);
 
-    _updateTaskState(TaskState.completed);
+    await _updateTaskStateAsync(TaskState.completed);
 
-    await create();
+    await createAsync();
   }
 
-  Future<void> _updateTaskState(
+  Future<void> _updateTaskStateAsync(
     TaskState newState,
   ) async {
     if (newState != TaskState.inProgress) {

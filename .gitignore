@@ -42,4 +42,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Ignore launch.json-file so it can contain secret; "args": ["--dart-define=GEMININE_API_KEY="]
+.vscode/launch.json
 *.g.dart

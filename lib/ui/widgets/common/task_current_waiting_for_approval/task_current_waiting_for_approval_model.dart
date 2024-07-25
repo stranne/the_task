@@ -3,13 +3,13 @@ import 'package:the_task/app/app.locator.dart';
 import 'package:the_task/services/task_current_service.dart';
 
 class TaskCurrentWaitingForApprovalModel extends BaseViewModel {
-  final taskCurrentService = locator<TaskCurrentService>();
+  final _taskCurrentService = locator<TaskCurrentService>();
 
   Future<void> acceptAsync() async {
-    taskCurrentService.accept();
+    _taskCurrentService.acceptAsync();
   }
 
   Future<void> skipAsync() async {
-    taskCurrentService.skip();
+    _taskCurrentService.skipAsync();
   }
 }

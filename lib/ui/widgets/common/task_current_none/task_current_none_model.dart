@@ -4,6 +4,6 @@ import 'package:the_task/services/task_current_service.dart';
 
 class TaskCurrentNoneModel extends BaseViewModel {
   Future<void> createTaskAsync() async {
-    await locator<TaskCurrentService>().create();
+    await locator<TaskCurrentService>().createAsync();
   }
 }

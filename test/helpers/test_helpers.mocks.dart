@@ -813,7 +813,7 @@ class MockStoreService extends _i1.Mock implements _i11.StoreService {
   @override
   _i7.Future<void> initAsync() => (super.noSuchMethod(
         Invocation.method(
-          #init,
+          #initAsync,
           [],
         ),
         returnValue: _i7.Future<void>.value(),
@@ -850,9 +850,9 @@ class MockTaskCurrentService extends _i1.Mock
       ) as int);
 
   @override
-  _i7.Future<void> init() => (super.noSuchMethod(
+  _i7.Future<void> initAsync() => (super.noSuchMethod(
         Invocation.method(
-          #init,
+          #initAsync,
           [],
         ),
         returnValue: _i7.Future<void>.value(),
@@ -892,9 +892,9 @@ class MockTaskCurrentService extends _i1.Mock
       ) as _i7.Future<_i3.Task>);
 
   @override
-  _i7.Future<void> create() => (super.noSuchMethod(
+  _i7.Future<void> createAsync() => (super.noSuchMethod(
         Invocation.method(
-          #create,
+          #createAsync,
           [],
         ),
         returnValue: _i7.Future<void>.value(),
@@ -902,9 +902,9 @@ class MockTaskCurrentService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> skip() => (super.noSuchMethod(
+  _i7.Future<void> skipAsync() => (super.noSuchMethod(
         Invocation.method(
-          #skip,
+          #skipAsync,
           [],
         ),
         returnValue: _i7.Future<void>.value(),
@@ -912,9 +912,9 @@ class MockTaskCurrentService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> accept() => (super.noSuchMethod(
+  _i7.Future<void> acceptAsync() => (super.noSuchMethod(
         Invocation.method(
-          #accept,
+          #acceptAsync,
           [],
         ),
         returnValue: _i7.Future<void>.value(),
@@ -922,9 +922,9 @@ class MockTaskCurrentService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> abandon() => (super.noSuchMethod(
+  _i7.Future<void> abandonAsync() => (super.noSuchMethod(
         Invocation.method(
-          #abandon,
+          #abandonAsync,
           [],
         ),
         returnValue: _i7.Future<void>.value(),
@@ -932,9 +932,9 @@ class MockTaskCurrentService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> complete() => (super.noSuchMethod(
+  _i7.Future<void> completeAsync() => (super.noSuchMethod(
         Invocation.method(
-          #complete,
+          #completeAsync,
           [],
         ),
         returnValue: _i7.Future<void>.value(),
@@ -1059,16 +1059,26 @@ class MockGenerativeService extends _i1.Mock implements _i17.GenerativeService {
       ) as _i18.GenerativeModel);
 
   @override
-  _i7.Future<String> generateAsync(String? prompt) => (super.noSuchMethod(
+  _i7.Future<String> generateAsync(
+    String? systemPrompt,
+    String? userPrompt,
+  ) =>
+      (super.noSuchMethod(
         Invocation.method(
           #generateAsync,
-          [prompt],
+          [
+            systemPrompt,
+            userPrompt,
+          ],
         ),
         returnValue: _i7.Future<String>.value(_i5.dummyValue<String>(
           this,
           Invocation.method(
             #generateAsync,
-            [prompt],
+            [
+              systemPrompt,
+              userPrompt,
+            ],
           ),
         )),
         returnValueForMissingStub:
@@ -1076,7 +1086,10 @@ class MockGenerativeService extends _i1.Mock implements _i17.GenerativeService {
           this,
           Invocation.method(
             #generateAsync,
-            [prompt],
+            [
+              systemPrompt,
+              userPrompt,
+            ],
           ),
         )),
       ) as _i7.Future<String>);

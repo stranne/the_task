@@ -39,6 +39,7 @@ class GoalForm extends StackedView<GoalFormModel> with $GoalForm {
         children: [
           TextField(
             controller: titleController,
+            focusNode: titleFocusNode,
             decoration: const InputDecoration(labelText: 'Title'),
           ),
           verticalSpaceMedium,

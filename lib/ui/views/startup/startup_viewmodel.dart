@@ -21,6 +21,6 @@ class StartupViewModel extends BaseViewModel {
 
   Future initialize() async {
     await locator<StoreService>().initAsync();
-    await locator<TaskCurrentService>().init();
+    await locator<TaskCurrentService>().initAsync();
   }
 }

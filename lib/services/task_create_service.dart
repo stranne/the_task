@@ -25,21 +25,15 @@ class TaskCreateService {
   }
 
   Future<Task> _generateTaskAsync(Goal goal) async {
-    final prompt = _createPrompt(goal);
-    final response = await locator<GenerativeService>().generateAsync(prompt);
+    final userPrompt = _createPrompt(goal);
+    final response = await locator<GenerativeService>()
+        .generateAsync(_systemPrompt, userPrompt);
     final json = jsonDecode(response);
     return Task.fromJson(json);
   }
 
-  String _createPrompt(Goal goal) {
-    final timeOfDay = TimeOfDay.now();
-    final tasksLatest20 = locator<TaskService>().getAll()
-      ..sort((a, b) => a.id.compareTo(-b.id))
-      ..take(20);
-    final taskStateService = locator<TaskStateService>();
-
-    return '''
-You are an expert task assistant for an app called "The Task". Your goal is to help people achieve their life goals, one small task at a time, to get closer to their life goals over time. Make each task as small and easy as possible to complete, ensuring it can be done within a day. The motto is that small steps lead to great progress over time, so it is important to just keep completing the small tasks. The user can only have a single task active at a time and must complete or abandon it before receiving a new one. A user can skip suggestions before selecting one to work with.
+  static const String _systemPrompt =
+      '''You are an expert task assistant for an app called "The Task". Your goal is to help people achieve their life goals, one small task at a time, to get closer to their life goals over time. Make each task as small and easy as possible to complete, ensuring it can be done within a day. The motto is that small steps lead to great progress over time, so it is important to just keep completing the small tasks. The user can only have a single task active at a time and must complete or abandon it before receiving a new one. A user can skip suggestions before selecting one to work with.
 
 When creating the next task, use all provided data such as previous tasks, the latest life goals, and any other meta-data (e.g., current time of day, weather) to customize a task that is a good next step. Select one life goal or combine multiple goals to create a task. Ensure the task is contextually relevant and specific to the user’s current situation.
 
@@ -62,10 +56,16 @@ Example response:
     "Consider what you can learn from this experience and how you might react differently next time."
   ],
   "success": "Great job! Reflecting on your emotions is a big step toward improving your emotional intelligence.",
-}
+}''';
 
----
+  String _createPrompt(Goal goal) {
+    final timeOfDay = TimeOfDay.now();
+    final tasksLatest20 = locator<TaskService>().getAll()
+      ..sort((a, b) => a.id.compareTo(-b.id))
+      ..take(20);
+    final taskStateService = locator<TaskStateService>();
 
+    return '''
 Goal to create a task for:
 - ${goal.title}
 
@@ -73,8 +73,17 @@ Meta data:
 - Current time of day: ${timeOfDay.hour}:${timeOfDay.minute}
 
 Previous tasks (latest to oldest):
-- ${tasksLatest20.map((task) => '(${taskStateService.toText(task.state)}) ${task.title}').join('\n')}
+${tasksLatest20.map((task) => '- (${taskStateService.toText(task.state)}) ${task.title}').join('\n')}
 '''
         .trim();
+
+/*
+TO ADD?
+* Users current locale: 
+* Current weather: 
+* Current location: 
+* Total skipped tasks: 
+* Total abandoned tasks: 
+* Total completed tasks:  */
   }
 }
