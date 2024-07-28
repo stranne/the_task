@@ -46,9 +46,7 @@ class TaskCurrentService with ListenableServiceMixin {
             .equals(_waitingForApprovalId)
             .or(Task_.stateId.equals(_inProgressId)))
         .build();
-    final task = await query.findUniqueAsync();
-
-    return task;
+    return await query.findUniqueAsync();
   }
 
   Future<Task> getTaskAsync() async {
