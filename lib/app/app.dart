@@ -13,6 +13,7 @@ import 'package:the_task/services/task_state_service.dart';
 import 'package:the_task/services/task_service.dart';
 import 'package:the_task/services/generative_service.dart';
 import 'package:the_task/services/task_create_service.dart';
+import 'package:the_task/ui/views/task_item/task_item_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -21,6 +22,7 @@ import 'package:the_task/services/task_create_service.dart';
     MaterialRoute(page: StartupView),
     MaterialRoute(page: GoalCreateView),
     MaterialRoute(page: GoalEditView),
+    MaterialRoute(page: TaskItemView),
 // @stacked-route
   ],
   dependencies: [

@@ -8,7 +8,8 @@ class GenerativeService {
 
   Future<String> generateAsync(String systemPrompt, String userPrompt) async {
     final content = [
-      Content.system(systemPrompt),
+      // TODO mark as system role when Gemini supports it
+      Content.text(systemPrompt),
       Content.text(userPrompt),
     ];
     final response = await model.generateContent(

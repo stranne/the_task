@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:the_task/models/task.dart';
-import 'package:the_task/ui/common/ui_helpers.dart';
+import 'package:the_task/ui/widgets/common/task_current_options/task_current_options.dart';
+import 'package:the_task/ui/widgets/common/task_item/task_item.dart';
 
 import 'task_current_waiting_for_approval_model.dart';
 
@@ -20,27 +21,18 @@ class TaskCurrentWaitingForApproval
     TaskCurrentWaitingForApprovalModel viewModel,
     Widget? child,
   ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 16.0,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(task.title),
-          verticalSpaceMedium,
-          ElevatedButton(
-            onPressed: viewModel.acceptAsync,
-            child: const Text('Accept'),
-          ),
-          verticalSpaceSmall,
-          ElevatedButton(
-            onPressed: viewModel.skipAsync,
-            child: const Text('Skip'),
-          ),
-        ],
-      ),
+    return TaskCurrentOptions(
+      options: [
+        ElevatedButton(
+          onPressed: viewModel.acceptAsync,
+          child: const Text('Accept'),
+        ),
+        ElevatedButton(
+          onPressed: viewModel.skipAsync,
+          child: const Text('Skip'),
+        ),
+      ],
+      child: TaskItem(task: task),
     );
   }
 

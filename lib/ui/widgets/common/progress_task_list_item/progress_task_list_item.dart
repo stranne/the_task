@@ -21,7 +21,7 @@ class ProgressTaskListItem extends StackedView<ProgressTaskListItemModel> {
     return ListTile(
       title: Text(task.title),
       subtitle: Text(viewModel.getTaskDisplayText(task.state)),
-      // TODO open detailed page
+      onTap: () => viewModel.navigateToTaskAsync(task),
     );
   }
 

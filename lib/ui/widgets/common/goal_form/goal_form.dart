@@ -34,7 +34,7 @@ class GoalForm extends StackedView<GoalFormModel> with $GoalForm {
     Widget? child,
   ) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           TextField(

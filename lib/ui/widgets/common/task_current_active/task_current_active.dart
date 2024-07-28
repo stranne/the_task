@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:the_task/models/task.dart';
 import 'package:the_task/ui/common/ui_helpers.dart';
+import 'package:the_task/ui/widgets/common/task_current_options/task_current_options.dart';
+import 'package:the_task/ui/widgets/common/task_item/task_item.dart';
 
 import 'task_current_active_model.dart';
 
@@ -19,27 +21,18 @@ class TaskCurrentActive extends StackedView<TaskCurrentActiveModel> {
     TaskCurrentActiveModel viewModel,
     Widget? child,
   ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 16.0,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(task.title),
-          verticalSpaceMedium,
-          ElevatedButton(
-            onPressed: viewModel.completeAsync,
-            child: const Text('Complete'),
-          ),
-          verticalSpaceSmall,
-          ElevatedButton(
-            onPressed: viewModel.abandonAsync,
-            child: const Text('Abandon'),
-          ),
-        ],
-      ),
+    return TaskCurrentOptions(
+      options: [
+        ElevatedButton(
+          onPressed: viewModel.completeAsync,
+          child: const Text('Complete'),
+        ),
+        ElevatedButton(
+          onPressed: viewModel.abandonAsync,
+          child: const Text('Abandon'),
+        ),
+      ],
+      child: TaskItem(task: task),
     );
   }
 

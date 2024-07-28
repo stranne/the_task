@@ -64,10 +64,14 @@ class TaskCurrentService with ListenableServiceMixin {
 
   Future<void> createAsync() async {
     state = TaskCurrentState.creating;
-    final task = await locator<TaskCreateService>().createAsync();
+    try {
+      final task = await locator<TaskCreateService>().createAsync();
 
-    await _store.box<Task>().putAsync(task);
-    state = TaskCurrentState.waitingForApproval;
+      await _store.box<Task>().putAsync(task);
+      state = TaskCurrentState.waitingForApproval;
+    } catch (e) {
+      state = TaskCurrentState.creatingFailed;
+    }
   }
 
   Future<void> skipAsync() async {

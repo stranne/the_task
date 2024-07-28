@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:the_task/ui/common/ui_helpers.dart';
+import 'package:the_task/ui/widgets/common/task_current_options/task_current_options.dart';
+import 'package:the_task/ui/widgets/common/task_item/task_item.dart';
 
 import 'task_current_none_model.dart';
 
@@ -13,21 +15,15 @@ class TaskCurrentNone extends StackedView<TaskCurrentNoneModel> {
     TaskCurrentNoneModel viewModel,
     Widget? child,
   ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 16.0,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('No current task'),
-          verticalSpaceMedium,
-          ElevatedButton(
-            onPressed: viewModel.createTaskAsync,
-            child: const Text('Create Task'),
-          ),
-        ],
+    return TaskCurrentOptions(
+      options: [
+        ElevatedButton(
+          onPressed: viewModel.createTaskAsync,
+          child: const Text('Create Task'),
+        ),
+      ],
+      child: const Center(
+        child: Text('No current task'),
       ),
     );
   }

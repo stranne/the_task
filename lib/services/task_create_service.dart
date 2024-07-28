@@ -12,8 +12,6 @@ import 'package:the_task/services/task_state_service.dart';
 
 class TaskCreateService {
   Future<Task> createAsync() async {
-    await Future.delayed(const Duration(seconds: 1));
-
     final goal = await _selectGoalAsync();
     return await _generateTaskAsync(goal);
   }
@@ -41,15 +39,15 @@ Return a JSON object with the following variables:
 - "description": A detailed description of the task.
 - "title": A short version of the task.
 - "why": An explanation of why this specific task is a good next step.
-- "step-by-step": Instructions on how to complete the task easily.
+- "stepByStep": Instructions on how to complete the task easily.
 - "success": A personalized message to display upon completing the task.
 
 Example response:
 {
-  "description": "Spend 15 minutes today reflecting on a recent interaction where you felt your emotions strongly. What were you feeling? How did you react? How could you have handled it differently?",
   "title": "Reflect on Emotional Interaction",
+  "description": "Spend 15 minutes today reflecting on a recent interaction where you felt your emotions strongly. What were you feeling? How did you react? How could you have handled it differently?",
   "why": "Reflecting on past interactions helps improve emotional intelligence by identifying patterns and understanding emotional triggers.",
-  "step-by-step": [
+  "stepByStep": [
     "Think about a recent interaction where you felt a strong emotion.",
     "Write down what you were feeling and how you reacted.",
     "Reflect on the situation and consider if there was a different way you could have handled it.",
