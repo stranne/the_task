@@ -1,6 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:the_task/models/goal.dart';
-import 'package:the_task/ui/widgets/common/goal_form/goal_form.form.dart';
+import 'package:the_task/ui/widgets/goal/goal_form/goal_form.form.dart';
 
 class GoalFormModel extends FormViewModel {
   final Function(Goal) _onSubmit;

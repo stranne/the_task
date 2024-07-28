@@ -9,6 +9,8 @@ import 'package:the_task/services/task_state_service.dart';
 import 'package:the_task/services/task_service.dart';
 import 'package:the_task/services/generative_service.dart';
 import 'package:the_task/services/task_create_service.dart';
+import 'package:the_task/services/task_feedback_type_service.dart';
+import 'package:the_task/services/task_feedback_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -24,6 +26,8 @@ import 'test_helpers.mocks.dart';
   MockSpec<TaskService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<GenerativeService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<TaskCreateService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<TaskFeedbackTypeService>(onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<TaskFeedbackService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -37,6 +41,8 @@ void registerServices() {
   getAndRegisterTaskService();
   getAndRegisterGenerativeService();
   getAndRegisterTaskCreateService();
+  getAndRegisterTaskFeedbackTypeService();
+  getAndRegisterTaskFeedbackService();
 // @stacked-mock-register
 }
 
@@ -136,6 +142,20 @@ MockTaskCreateService getAndRegisterTaskCreateService() {
   _removeRegistrationIfExists<TaskCreateService>();
   final service = MockTaskCreateService();
   locator.registerSingleton<TaskCreateService>(service);
+  return service;
+}
+
+MockTaskFeedbackTypeService getAndRegisterTaskFeedbackTypeService() {
+  _removeRegistrationIfExists<TaskFeedbackTypeService>();
+  final service = MockTaskFeedbackTypeService();
+  locator.registerSingleton<TaskFeedbackTypeService>(service);
+  return service;
+}
+
+MockTaskFeedbackService getAndRegisterTaskFeedbackService() {
+  _removeRegistrationIfExists<TaskFeedbackService>();
+  final service = MockTaskFeedbackService();
+  locator.registerSingleton<TaskFeedbackService>(service);
   return service;
 }
 // @stacked-mock-create

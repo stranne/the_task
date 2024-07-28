@@ -14,6 +14,8 @@ import 'package:stacked_services/stacked_services.dart' as _i4;
 import 'package:the_task/models/goal.dart' as _i10;
 import 'package:the_task/models/task.dart' as _i3;
 import 'package:the_task/models/task_current_state.dart' as _i13;
+import 'package:the_task/models/task_feedback.dart' as _i23;
+import 'package:the_task/models/task_feedback_type.dart' as _i21;
 import 'package:the_task/models/task_state.dart' as _i15;
 import 'package:the_task/objectbox.g.dart' as _i2;
 import 'package:the_task/services/generative_service.dart' as _i17;
@@ -21,6 +23,8 @@ import 'package:the_task/services/goal_service.dart' as _i9;
 import 'package:the_task/services/store_service.dart' as _i11;
 import 'package:the_task/services/task_create_service.dart' as _i19;
 import 'package:the_task/services/task_current_service.dart' as _i12;
+import 'package:the_task/services/task_feedback_service.dart' as _i22;
+import 'package:the_task/services/task_feedback_type_service.dart' as _i20;
 import 'package:the_task/services/task_service.dart' as _i16;
 import 'package:the_task/services/task_state_service.dart' as _i14;
 
@@ -902,10 +906,10 @@ class MockTaskCurrentService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> skipAsync() => (super.noSuchMethod(
+  _i7.Future<void> skipAsync(_i3.Task? task) => (super.noSuchMethod(
         Invocation.method(
           #skipAsync,
-          [],
+          [task],
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
@@ -922,20 +926,20 @@ class MockTaskCurrentService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> abandonAsync() => (super.noSuchMethod(
+  _i7.Future<void> abandonAsync(_i3.Task? task) => (super.noSuchMethod(
         Invocation.method(
           #abandonAsync,
-          [],
+          [task],
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> completeAsync() => (super.noSuchMethod(
+  _i7.Future<void> completeAsync(_i3.Task? task) => (super.noSuchMethod(
         Invocation.method(
           #completeAsync,
-          [],
+          [task],
         ),
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
@@ -1031,14 +1035,56 @@ class MockTaskStateService extends _i1.Mock implements _i14.TaskStateService {
 /// See the documentation for Mockito's code generation for more information.
 class MockTaskService extends _i1.Mock implements _i16.TaskService {
   @override
-  List<_i3.Task> getAll() => (super.noSuchMethod(
+  _i7.Future<List<_i3.Task>> getAllAsync() => (super.noSuchMethod(
         Invocation.method(
-          #getAll,
+          #getAllAsync,
           [],
         ),
-        returnValue: <_i3.Task>[],
-        returnValueForMissingStub: <_i3.Task>[],
-      ) as List<_i3.Task>);
+        returnValue: _i7.Future<List<_i3.Task>>.value(<_i3.Task>[]),
+        returnValueForMissingStub:
+            _i7.Future<List<_i3.Task>>.value(<_i3.Task>[]),
+      ) as _i7.Future<List<_i3.Task>>);
+
+  @override
+  _i7.Future<List<_i3.Task>> get20LatestAsync() => (super.noSuchMethod(
+        Invocation.method(
+          #get20LatestAsync,
+          [],
+        ),
+        returnValue: _i7.Future<List<_i3.Task>>.value(<_i3.Task>[]),
+        returnValueForMissingStub:
+            _i7.Future<List<_i3.Task>>.value(<_i3.Task>[]),
+      ) as _i7.Future<List<_i3.Task>>);
+
+  @override
+  int totalSkippedTasks() => (super.noSuchMethod(
+        Invocation.method(
+          #totalSkippedTasks,
+          [],
+        ),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  int totalAbandonedTasks() => (super.noSuchMethod(
+        Invocation.method(
+          #totalAbandonedTasks,
+          [],
+        ),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  int totalCompletedTasks() => (super.noSuchMethod(
+        Invocation.method(
+          #totalCompletedTasks,
+          [],
+        ),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
 }
 
 /// A class which mocks [GenerativeService].
@@ -1120,4 +1166,96 @@ class MockTaskCreateService extends _i1.Mock implements _i19.TaskCreateService {
           ),
         )),
       ) as _i7.Future<_i3.Task>);
+}
+
+/// A class which mocks [TaskFeedbackTypeService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTaskFeedbackTypeService extends _i1.Mock
+    implements _i20.TaskFeedbackTypeService {
+  @override
+  int toInt(_i21.TaskFeedbackType? type) => (super.noSuchMethod(
+        Invocation.method(
+          #toInt,
+          [type],
+        ),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  List<int> toInts(List<_i21.TaskFeedbackType>? types) => (super.noSuchMethod(
+        Invocation.method(
+          #toInts,
+          [types],
+        ),
+        returnValue: <int>[],
+        returnValueForMissingStub: <int>[],
+      ) as List<int>);
+
+  @override
+  _i21.TaskFeedbackType fromInt(int? typeId) => (super.noSuchMethod(
+        Invocation.method(
+          #fromInt,
+          [typeId],
+        ),
+        returnValue: _i21.TaskFeedbackType.notRelevant,
+        returnValueForMissingStub: _i21.TaskFeedbackType.notRelevant,
+      ) as _i21.TaskFeedbackType);
+
+  @override
+  List<_i21.TaskFeedbackType> fromInts(List<int>? typeIds) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fromInts,
+          [typeIds],
+        ),
+        returnValue: <_i21.TaskFeedbackType>[],
+        returnValueForMissingStub: <_i21.TaskFeedbackType>[],
+      ) as List<_i21.TaskFeedbackType>);
+
+  @override
+  String toText(_i21.TaskFeedbackType? type) => (super.noSuchMethod(
+        Invocation.method(
+          #toText,
+          [type],
+        ),
+        returnValue: _i5.dummyValue<String>(
+          this,
+          Invocation.method(
+            #toText,
+            [type],
+          ),
+        ),
+        returnValueForMissingStub: _i5.dummyValue<String>(
+          this,
+          Invocation.method(
+            #toText,
+            [type],
+          ),
+        ),
+      ) as String);
+}
+
+/// A class which mocks [TaskFeedbackService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTaskFeedbackService extends _i1.Mock
+    implements _i22.TaskFeedbackService {
+  @override
+  _i7.Future<void> saveAsync(
+    _i23.TaskFeedback? taskFeedback,
+    _i3.Task? task,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveAsync,
+          [
+            taskFeedback,
+            task,
+          ],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }

@@ -24,7 +24,7 @@
     },
     {
       "id": "2:8682573953419704556",
-      "lastPropertyId": "7:7520743192823362355",
+      "lastPropertyId": "8:8083356456651760688",
       "name": "Task",
       "properties": [
         {
@@ -62,13 +62,45 @@
           "id": "7:7520743192823362355",
           "name": "success",
           "type": 9
+        },
+        {
+          "id": "8:8083356456651760688",
+          "name": "feedbackId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:6333037382263232094",
+          "relationTarget": "TaskFeedback"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:4118112943760843882",
+      "lastPropertyId": "4:1898941690691993539",
+      "name": "TaskFeedback",
+      "properties": [
+        {
+          "id": "1:1429828420923778542",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "3:3583927841932583954",
+          "name": "comment",
+          "type": 9
+        },
+        {
+          "id": "4:1898941690691993539",
+          "name": "typeIds",
+          "type": 27
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "2:8682573953419704556",
-  "lastIndexId": "0:0",
+  "lastEntityId": "3:4118112943760843882",
+  "lastIndexId": "1:6333037382263232094",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

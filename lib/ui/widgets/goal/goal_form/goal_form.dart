@@ -7,9 +7,11 @@ import 'package:the_task/ui/common/ui_helpers.dart';
 import 'goal_form_model.dart';
 import 'goal_form.form.dart';
 
-@FormView(fields: [
-  FormTextField(name: 'title'),
-])
+@FormView(
+  fields: [
+    FormTextField(name: 'title'),
+  ],
+)
 class GoalForm extends StackedView<GoalFormModel> with $GoalForm {
   final Function(Goal) onSubmit;
   final String _submitButtonLabel;
@@ -41,6 +43,7 @@ class GoalForm extends StackedView<GoalFormModel> with $GoalForm {
             controller: titleController,
             focusNode: titleFocusNode,
             decoration: const InputDecoration(labelText: 'Title'),
+            maxLength: 250,
           ),
           verticalSpaceMedium,
           ElevatedButton(
@@ -67,5 +70,11 @@ class GoalForm extends StackedView<GoalFormModel> with $GoalForm {
     if (goal != null) {
       titleController.text = goal!.title;
     }
+  }
+
+  @override
+  void onDispose(GoalFormModel viewModel) {
+    super.onDispose(viewModel);
+    disposeForm();
   }
 }

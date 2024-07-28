@@ -17,6 +17,10 @@ class OrderedList extends StackedView<OrderedListModel> {
     OrderedListModel viewModel,
     Widget? child,
   ) {
+    if (items.isEmpty) {
+      return const SizedBox();
+    }
+
     return Column(
       children: items
           .map(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:the_task/ui/widgets/common/goal_list/goal_list.dart';
-import 'package:the_task/ui/widgets/common/progress/progress.dart';
-import 'package:the_task/ui/widgets/common/task_current/task_current.dart';
+import 'package:the_task/ui/widgets/goal/goal_list/goal_list.dart';
+import 'package:the_task/ui/widgets/progress/progress/progress.dart';
+import 'package:the_task/ui/widgets/task_current/task_current/task_current.dart';
 
 import 'home_viewmodel.dart';
 

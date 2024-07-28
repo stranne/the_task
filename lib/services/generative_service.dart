@@ -7,8 +7,9 @@ class GenerativeService {
   );
 
   Future<String> generateAsync(String systemPrompt, String userPrompt) async {
+    // Exceptions will be handled through TaskCurrentState.creatingFailed and displayed gracefully to the user
     final content = [
-      // TODO mark as system role when Gemini supports it
+      // TODO mark as system role when model supports it
       Content.text(systemPrompt),
       Content.text(userPrompt),
     ];

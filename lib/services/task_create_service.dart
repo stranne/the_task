@@ -7,10 +7,13 @@ import 'package:the_task/models/goal.dart';
 import 'package:the_task/models/task.dart';
 import 'package:the_task/services/generative_service.dart';
 import 'package:the_task/services/goal_service.dart';
+import 'package:the_task/services/task_feedback_type_service.dart';
 import 'package:the_task/services/task_service.dart';
 import 'package:the_task/services/task_state_service.dart';
 
 class TaskCreateService {
+  final _taskStateService = locator<TaskStateService>();
+
   Future<Task> createAsync() async {
     final goal = await _selectGoalAsync();
     return await _generateTaskAsync(goal);
@@ -23,7 +26,7 @@ class TaskCreateService {
   }
 
   Future<Task> _generateTaskAsync(Goal goal) async {
-    final userPrompt = _createPrompt(goal);
+    final userPrompt = await _createPrompt(goal);
     final response = await locator<GenerativeService>()
         .generateAsync(_systemPrompt, userPrompt);
     final json = jsonDecode(response);
@@ -56,12 +59,15 @@ Example response:
   "success": "Great job! Reflecting on your emotions is a big step toward improving your emotional intelligence.",
 }''';
 
-  String _createPrompt(Goal goal) {
+  Future<String> _createPrompt(Goal goal) async {
+    final taskService = locator<TaskService>();
+
     final timeOfDay = TimeOfDay.now();
-    final tasksLatest20 = locator<TaskService>().getAll()
-      ..sort((a, b) => a.id.compareTo(-b.id))
-      ..take(20);
-    final taskStateService = locator<TaskStateService>();
+    final tasksLatest20 = await taskService.get20LatestAsync();
+
+    final totalSkippedTasks = taskService.totalSkippedTasks();
+    final totalAbandonedTasks = taskService.totalAbandonedTasks();
+    final totalCompletedTasks = taskService.totalCompletedTasks();
 
     return '''
 Goal to create a task for:
@@ -69,9 +75,12 @@ Goal to create a task for:
 
 Meta data:
 - Current time of day: ${timeOfDay.hour}:${timeOfDay.minute}
+- Total skipped tasks: $totalSkippedTasks
+- Total abandoned tasks: $totalAbandonedTasks
+- Total completed tasks: $totalCompletedTasks
 
 Previous tasks (latest to oldest):
-${tasksLatest20.map((task) => '- (${taskStateService.toText(task.state)}) ${task.title}').join('\n')}
+${tasksLatest20.map(_createPromptTaskItem).join('\n')}
 '''
         .trim();
 
@@ -79,9 +88,31 @@ ${tasksLatest20.map((task) => '- (${taskStateService.toText(task.state)}) ${task
 TO ADD?
 * Users current locale: 
 * Current weather: 
-* Current location: 
-* Total skipped tasks: 
-* Total abandoned tasks: 
-* Total completed tasks:  */
+* Current location:   */
+  }
+
+  String _createPromptTaskItem(Task task) => '''
+- ${task.title}
+  - State: ${_taskStateService.toText(task.state)}
+${_createPromptTaskItemFeedback(task)}
+'''
+      .trim();
+
+  String _createPromptTaskItemFeedback(Task task) {
+    final taskFeedbackTypeService = locator<TaskFeedbackTypeService>();
+
+    final feedback = task.feedback.target;
+    if (feedback == null) {
+      return '';
+    }
+
+    var text = '  - Feedback:';
+    for (var type in feedback.types) {
+      text += '\n    - ${taskFeedbackTypeService.toText(type)}';
+    }
+    if (feedback.comment != null) {
+      text += '\n    - Comment: ${feedback.comment}';
+    }
+    return text;
   }
 }

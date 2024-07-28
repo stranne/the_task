@@ -1,7 +1,11 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+import 'package:the_task/app/app.bottomsheets.dart';
 import 'package:the_task/app/app.locator.dart';
 import 'package:the_task/models/task.dart';
+import 'package:the_task/models/task_current_feedback_sheet_data.dart';
 import 'package:the_task/models/task_current_state.dart';
+import 'package:the_task/models/task_feedback_type.dart';
 import 'package:the_task/models/task_state.dart';
 import 'package:the_task/objectbox.g.dart';
 import 'package:the_task/services/store_service.dart';
@@ -72,8 +76,14 @@ class TaskCurrentService with ListenableServiceMixin {
     }
   }
 
-  Future<void> skipAsync() async {
+  Future<void> skipAsync(Task task) async {
     assert(state == TaskCurrentState.waitingForApproval);
+
+    await _askForFeedback(task, [
+      TaskFeedbackType.notRelevant,
+      TaskFeedbackType.tooBasic,
+      TaskFeedbackType.alreadyDone,
+    ]);
 
     await _updateTaskStateAsync(TaskState.skipped);
 
@@ -88,16 +98,31 @@ class TaskCurrentService with ListenableServiceMixin {
     state = TaskCurrentState.active;
   }
 
-  Future<void> abandonAsync() async {
+  Future<void> abandonAsync(Task task) async {
     assert(state == TaskCurrentState.active);
+
+    await _askForFeedback(
+      task,
+      [
+        TaskFeedbackType.tooDificult,
+        TaskFeedbackType.lackOfResources,
+        TaskFeedbackType.unclearInstructions,
+      ],
+    );
 
     await _updateTaskStateAsync(TaskState.abandoned);
 
     await createAsync();
   }
 
-  Future<void> completeAsync() async {
+  Future<void> completeAsync(Task task) async {
     assert(state == TaskCurrentState.active);
+
+    await _askForFeedback(task, [
+      TaskFeedbackType.challangingButDoable,
+      TaskFeedbackType.clearInstructions,
+      TaskFeedbackType.enjoyableTask,
+    ]);
 
     await _updateTaskStateAsync(TaskState.completed);
 
@@ -117,4 +142,16 @@ class TaskCurrentService with ListenableServiceMixin {
     task.state = newState;
     await _store.box<Task>().putAsync(task);
   }
+
+  Future<void> _askForFeedback(
+    Task task,
+    List<TaskFeedbackType> feedbackTypes,
+  ) async =>
+      await locator<BottomSheetService>().showCustomSheet(
+        variant: BottomSheetType.taskCurrentFeedback,
+        data: TaskCurrentFeedbackSheetData(
+          task: task,
+          feedbackTypes: feedbackTypes,
+        ),
+      );
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:the_task/ui/widgets/common/goal_list_empty/goal_list_empty.dart';
-import 'package:the_task/ui/widgets/common/goal_list_item/goal_list_item.dart';
+import 'package:the_task/ui/widgets/goal/goal_list_empty/goal_list_empty.dart';
+import 'package:the_task/ui/widgets/goal/goal_list_item/goal_list_item.dart';
 
 import 'goal_list_model.dart';
 

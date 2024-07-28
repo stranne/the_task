@@ -14,6 +14,9 @@ import 'package:the_task/services/task_service.dart';
 import 'package:the_task/services/generative_service.dart';
 import 'package:the_task/services/task_create_service.dart';
 import 'package:the_task/ui/views/task_item/task_item_view.dart';
+import 'package:the_task/ui/bottom_sheets/task_current_feedback/task_current_feedback_sheet.dart';
+import 'package:the_task/services/task_feedback_type_service.dart';
+import 'package:the_task/services/task_feedback_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -23,7 +26,7 @@ import 'package:the_task/ui/views/task_item/task_item_view.dart';
     MaterialRoute(page: GoalCreateView),
     MaterialRoute(page: GoalEditView),
     MaterialRoute(page: TaskItemView),
-// @stacked-route
+    // @stacked-route
   ],
   dependencies: [
     LazySingleton(classType: BottomSheetService),
@@ -36,10 +39,13 @@ import 'package:the_task/ui/views/task_item/task_item_view.dart';
     LazySingleton(classType: TaskService),
     LazySingleton(classType: GenerativeService),
     LazySingleton(classType: TaskCreateService),
+    LazySingleton(classType: TaskFeedbackTypeService),
+    LazySingleton(classType: TaskFeedbackService),
 // @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
+    StackedBottomsheet(classType: TaskCurrentFeedbackSheet),
     // @stacked-bottom-sheet
   ],
   dialogs: [

@@ -22,11 +22,12 @@ class TaskItem extends StackedView<TaskItemModel> {
     TaskItemModel viewModel,
     Widget? child,
   ) {
+    final feedback = task.feedback.target;
+
     return SizedBox(
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        
         children: [
           if (!hideTitle) ...[
             Text(
@@ -58,6 +59,23 @@ class TaskItem extends StackedView<TaskItemModel> {
                 )
                 .toList(),
           ),
+          if (feedback != null) ...[
+            verticalSpaceMedium,
+            Text(
+              'Feedback',
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            OrderedList(
+              items: feedback.types
+                  .map(viewModel.getFeedbackTypeString)
+                  .map((text) => Text(text))
+                  .toList(),
+            ),
+            if (feedback.comment != null) ...[
+              verticalSpaceSmall,
+              Text(feedback.comment!),
+            ],
+          ],
         ],
       ),
     );

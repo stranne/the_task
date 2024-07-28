@@ -11,7 +11,8 @@ class ProgressTaskListItemModel extends BaseViewModel {
 
   String getTaskDisplayText(TaskState state) => _taskStateService.toText(state);
 
-  Future<void> navigateToTaskAsync(Task task) async => await locator<NavigationService>().navigateTo(
+  Future<void> navigateToTaskAsync(Task task) async =>
+      await locator<NavigationService>().navigateTo(
         Routes.taskItemView,
         arguments: TaskItemViewArguments(task: task),
       );

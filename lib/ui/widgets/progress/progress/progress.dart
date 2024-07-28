@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:the_task/ui/widgets/common/progress_task_list/progress_task_list.dart';
+import 'package:the_task/ui/widgets/progress/progress_task_list/progress_task_list.dart';
 
 import 'progress_model.dart';
 
