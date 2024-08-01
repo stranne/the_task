@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:the_task/ui/widgets/common/progress_indicator_delayed/progress_indicator_delyaed.dart';
+import 'package:the_task/ui/widgets/common/loading_indicator_delayed/loading_indicator_delyaed.dart';
 import 'package:the_task/ui/widgets/progress/progress_task_list_empty/progress_task_list_empty.dart';
 import 'package:the_task/ui/widgets/progress/progress_task_list_item/progress_task_list_item.dart';
 
@@ -16,7 +16,7 @@ class ProgressTaskList extends StackedView<ProgressTaskListModel> {
     Widget? child,
   ) {
     if (!viewModel.dataReady) {
-      return const ProgressIndicatorDelayed();
+      return const LoadingIndicatorDelayed();
     }
 
     final tasks = viewModel.data;

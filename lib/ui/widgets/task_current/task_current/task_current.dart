@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:the_task/models/task.dart';
 import 'package:the_task/models/task_current_state.dart';
-import 'package:the_task/ui/widgets/common/progress_indicator_delayed/progress_indicator_delyaed.dart';
+import 'package:the_task/ui/widgets/common/loading_indicator_delayed/loading_indicator_delyaed.dart';
 import 'package:the_task/ui/widgets/task_current/task_current_active/task_current_active.dart';
 import 'package:the_task/ui/widgets/task_current/task_current_creating/task_current_creating.dart';
 import 'package:the_task/ui/widgets/task_current/task_current_creating_failed/task_current_creating_failed.dart';
@@ -68,7 +68,7 @@ class TaskCurrent extends StackedView<TaskCurrentModel> {
             return builder(snapshot.data as Task);
           } else {
             return const Center(
-              child: ProgressIndicatorDelayed(),
+              child: LoadingIndicatorDelayed(),
             );
           }
         });

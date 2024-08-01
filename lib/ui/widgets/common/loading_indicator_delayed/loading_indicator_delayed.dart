@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'progress_indicator_delyaed_model.dart';
+import 'loading_indicator_delyaed_model.dart';
 
-class ProgressIndicatorDelayed
-    extends StackedView<ProgressIndicatorDelayedModel> {
+class LoadingIndicatorDelayed
+    extends StackedView<LoadingIndicatorDelayedModel> {
   final Duration? duration;
 
-  const ProgressIndicatorDelayed({
+  const LoadingIndicatorDelayed({
     super.key,
     this.duration = const Duration(milliseconds: 200),
   });
@@ -15,19 +15,19 @@ class ProgressIndicatorDelayed
   @override
   Widget builder(
     BuildContext context,
-    ProgressIndicatorDelayedModel viewModel,
+    LoadingIndicatorDelayedModel viewModel,
     Widget? child,
   ) {
     return viewModel.display
         ? const Center(
-            child: ProgressIndicatorDelayed(),
+            child: CircularProgressIndicator(),
           )
         : const SizedBox.shrink();
   }
 
   @override
-  ProgressIndicatorDelayedModel viewModelBuilder(
+  LoadingIndicatorDelayedModel viewModelBuilder(
     BuildContext context,
   ) =>
-      ProgressIndicatorDelayedModel(duration);
+      LoadingIndicatorDelayedModel(duration);
 }
