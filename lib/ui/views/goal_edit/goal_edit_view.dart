@@ -9,9 +9,9 @@ class GoalEditView extends StackedView<GoalEditViewModel> {
   final Goal goal;
 
   const GoalEditView({
-    Key? key,
+    super.key,
     required this.goal,
-  }) : super(key: key);
+  });
 
   @override
   Widget builder(

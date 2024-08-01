@@ -7,7 +7,7 @@ import 'package:the_task/ui/widgets/task_current/task_current/task_current.dart'
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget builder(

@@ -5,7 +5,7 @@ import 'package:the_task/ui/widgets/goal/goal_form/goal_form.dart';
 import 'goal_create_viewmodel.dart';
 
 class GoalCreateView extends StackedView<GoalCreateViewModel> {
-  const GoalCreateView({Key? key}) : super(key: key);
+  const GoalCreateView({super.key});
 
   @override
   Widget builder(

@@ -43,7 +43,7 @@ class TaskCurrentFeedbackForm extends StackedView<TaskCurrentFeedbackFormModel>
                 title: Text(viewModel.getFeedbackTypeDisplayText(feedbackType)),
               ),
             )
-            .toList(),
+            ,
         TextField(
           controller: commentController,
           focusNode: commentFocusNode,

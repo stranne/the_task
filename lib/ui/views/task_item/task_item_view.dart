@@ -9,9 +9,9 @@ class TaskItemView extends StackedView<TaskItemViewModel> {
   final Task task;
 
   const TaskItemView({
-    Key? key,
+    super.key,
     required this.task,
-  }) : super(key: key);
+  });
 
   @override
   Widget builder(
