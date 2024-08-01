@@ -23,11 +23,13 @@ class TaskItemView extends StackedView<TaskItemViewModel> {
       appBar: AppBar(
         title: Text(task.title),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: TaskItem(
-          task: task,
-          hideTitle: true,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: TaskItem(
+            task: task,
+            hideTitle: true,
+          ),
         ),
       ),
     );

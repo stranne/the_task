@@ -1,4 +1,5 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:the_task/app/app.bottomsheets.dart';
 import 'package:the_task/app/app.locator.dart';
@@ -12,14 +13,17 @@ import 'package:the_task/services/store_service.dart';
 import 'package:the_task/services/task_create_service.dart';
 import 'package:the_task/services/task_state_service.dart';
 
-class TaskCurrentService with ListenableServiceMixin {
+class TaskCurrentService
+    with ListenableServiceMixin
+    implements InitializableDependency {
   static final _waitingForApprovalId =
       TaskStateService.mappings[TaskState.waitingForApproval]!;
   static final _inProgressId = TaskStateService.mappings[TaskState.inProgress]!;
 
   Store get _store => locator<StoreService>().store;
 
-  Future<void> initAsync() async {
+  @override
+  Future<void> init() async {
     final task = await getTaskOrNullAsync();
     switch (task?.state) {
       case TaskState.waitingForApproval:

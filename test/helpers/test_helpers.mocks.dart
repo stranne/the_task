@@ -815,9 +815,9 @@ class MockStoreService extends _i1.Mock implements _i11.StoreService {
       ) as _i2.Store);
 
   @override
-  _i7.Future<void> initAsync() => (super.noSuchMethod(
+  _i7.Future<void> init() => (super.noSuchMethod(
         Invocation.method(
-          #initAsync,
+          #init,
           [],
         ),
         returnValue: _i7.Future<void>.value(),
@@ -854,9 +854,9 @@ class MockTaskCurrentService extends _i1.Mock
       ) as int);
 
   @override
-  _i7.Future<void> initAsync() => (super.noSuchMethod(
+  _i7.Future<void> init() => (super.noSuchMethod(
         Invocation.method(
-          #initAsync,
+          #init,
           [],
         ),
         returnValue: _i7.Future<void>.value(),
