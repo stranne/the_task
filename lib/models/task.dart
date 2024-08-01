@@ -1,5 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 import 'package:the_task/app/app.locator.dart';
+import 'package:the_task/models/goal.dart';
 import 'package:the_task/models/task_feedback.dart';
 import 'package:the_task/models/task_state.dart';
 import 'package:the_task/services/task_state_service.dart';
@@ -15,6 +16,7 @@ class Task {
   List<String> stepByStep;
   String success;
   final feedback = ToOne<TaskFeedback>();
+  final goal = ToOne<Goal>();
 
   TaskState get state => locator<TaskStateService>().fromInt(stateId);
   set state(TaskState value) =>

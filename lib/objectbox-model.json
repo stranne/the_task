@@ -24,7 +24,7 @@
     },
     {
       "id": "2:8682573953419704556",
-      "lastPropertyId": "8:8083356456651760688",
+      "lastPropertyId": "9:892392908242392059",
       "name": "Task",
       "properties": [
         {
@@ -70,6 +70,14 @@
           "flags": 520,
           "indexId": "1:6333037382263232094",
           "relationTarget": "TaskFeedback"
+        },
+        {
+          "id": "9:892392908242392059",
+          "name": "goalId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "2:1998306390161638761",
+          "relationTarget": "Goal"
         }
       ],
       "relations": []
@@ -100,7 +108,7 @@
     }
   ],
   "lastEntityId": "3:4118112943760843882",
-  "lastIndexId": "1:6333037382263232094",
+  "lastIndexId": "2:1998306390161638761",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

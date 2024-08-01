@@ -16,7 +16,9 @@ class TaskCreateService {
 
   Future<Task> createAsync() async {
     final goal = await _selectGoalAsync();
-    return await _generateTaskAsync(goal);
+    final task = await _generateTaskAsync(goal);
+    task.goal.target = goal;
+    return task;
   }
 
   Future<Goal> _selectGoalAsync() async {

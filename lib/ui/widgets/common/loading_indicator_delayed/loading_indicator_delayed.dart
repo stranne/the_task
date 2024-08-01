@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'loading_indicator_delyaed_model.dart';
+import 'loading_indicator_delayed_model.dart';
 
 class LoadingIndicatorDelayed
     extends StackedView<LoadingIndicatorDelayedModel> {

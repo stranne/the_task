@@ -22,6 +22,7 @@ class TaskItem extends StackedView<TaskItemModel> {
     TaskItemModel viewModel,
     Widget? child,
   ) {
+    final goal = task.goal.target;
     final feedback = task.feedback.target;
 
     return SizedBox(
@@ -42,6 +43,10 @@ class TaskItem extends StackedView<TaskItemModel> {
           ),
           Text(task.description),
           verticalSpaceMedium,
+          if (goal != null) ...[
+            Text(goal.title),
+            verticalSpaceMedium,
+          ],
           Text(
             'Why',
             style: Theme.of(context).textTheme.bodySmall,

@@ -59,7 +59,7 @@ class TaskCurrentFeedbackFormModel extends FormViewModel {
 
   Future<void> saveAsync(Task task) async {
     final typeIds = locator<TaskFeedbackTypeService>().toInts(_feedbackTypes);
-    final comment = commentValue?.isNotEmpty == true ? commentValue: null;
+    final comment = commentValue?.isNotEmpty == true ? commentValue : null;
     final taskFeedback = TaskFeedback(
       typeIds: typeIds,
       comment: comment,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:the_task/ui/widgets/common/loading_indicator_delayed/loading_indicator_delyaed.dart';
+import 'package:the_task/ui/widgets/common/loading_indicator_delayed/loading_indicator_delayed.dart';
 
 import 'task_current_creating_model.dart';
 
