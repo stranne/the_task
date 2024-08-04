@@ -24,7 +24,7 @@
     },
     {
       "id": "2:8682573953419704556",
-      "lastPropertyId": "9:892392908242392059",
+      "lastPropertyId": "11:5380814539303126738",
       "name": "Task",
       "properties": [
         {
@@ -78,6 +78,16 @@
           "flags": 520,
           "indexId": "2:1998306390161638761",
           "relationTarget": "Goal"
+        },
+        {
+          "id": "10:1179013572758527053",
+          "name": "created",
+          "type": 10
+        },
+        {
+          "id": "11:5380814539303126738",
+          "name": "closed",
+          "type": 10
         }
       ],
       "relations": []

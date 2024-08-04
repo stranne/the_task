@@ -33,17 +33,15 @@ class TaskCurrentFeedbackForm extends StackedView<TaskCurrentFeedbackFormModel>
   ) {
     return Column(
       children: [
-        ...feedbackTypes
-            .map(
-              (feedbackType) => CheckboxListTile.adaptive(
-                dense: true,
-                value: viewModel.getFeedbackType(feedbackType),
-                onChanged: (value) =>
-                    viewModel.setFeedbackType(feedbackType, value),
-                title: Text(viewModel.getFeedbackTypeDisplayText(feedbackType)),
-              ),
-            )
-            ,
+        ...feedbackTypes.map(
+          (feedbackType) => CheckboxListTile.adaptive(
+            dense: true,
+            value: viewModel.getFeedbackType(feedbackType),
+            onChanged: (value) =>
+                viewModel.setFeedbackType(feedbackType, value),
+            title: Text(viewModel.getFeedbackTypeDisplayText(feedbackType)),
+          ),
+        ),
         TextField(
           controller: commentController,
           focusNode: commentFocusNode,

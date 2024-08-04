@@ -15,6 +15,9 @@ class Task {
   String why;
   List<String> stepByStep;
   String success;
+  DateTime created;
+  DateTime? closed;
+
   final feedback = ToOne<TaskFeedback>();
   final goal = ToOne<Goal>();
 
@@ -30,6 +33,8 @@ class Task {
     required this.why,
     required this.stepByStep,
     required this.success,
+    required this.created,
+    required this.closed,
   });
 
   factory Task.fromJson(Map<String, dynamic> json) {
@@ -41,6 +46,8 @@ class Task {
       why: json['why'],
       stepByStep: List<String>.from(json['stepByStep']),
       success: json['success'],
+      created: DateTime.now().toUtc(),
+      closed: null,
     );
   }
 }

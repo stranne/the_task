@@ -20,10 +20,7 @@ class TaskCurrent extends StackedView<TaskCurrentModel> {
     TaskCurrentModel viewModel,
     Widget? child,
   ) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: _buildTaskCurrentState(viewModel),
-    );
+    return _buildTaskCurrentState(viewModel);
   }
 
   @override

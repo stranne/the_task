@@ -17,6 +17,7 @@ import 'package:the_task/ui/views/task_item/task_item_view.dart';
 import 'package:the_task/ui/bottom_sheets/task_current_feedback/task_current_feedback_sheet.dart';
 import 'package:the_task/services/task_feedback_type_service.dart';
 import 'package:the_task/services/task_feedback_service.dart';
+import 'package:the_task/services/task_current_countdown_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -41,6 +42,7 @@ import 'package:the_task/services/task_feedback_service.dart';
     LazySingleton(classType: TaskService),
     LazySingleton(classType: TaskCreateService),
     LazySingleton(classType: TaskFeedbackService),
+    LazySingleton(classType: TaskCurrentCountdownService),
 // @stacked-service
   ],
   bottomsheets: [

@@ -5,24 +5,24 @@ import 'package:the_task/objectbox.g.dart';
 import 'package:the_task/services/store_service.dart';
 
 class GoalService with ListenableServiceMixin {
-  Store get _store => locator<StoreService>().store;
+  Box<Goal> get _box => locator<StoreService>().getBox<Goal>();
 
   Future<void> createAsync(Goal goal) async {
-    await _store.box<Goal>().putAsync(goal);
+    await _box.putAsync(goal);
     notifyListeners();
   }
 
   Future<void> updateAsync(Goal goal) async {
-    await _store.box<Goal>().putAsync(goal);
+    await _box.putAsync(goal);
     notifyListeners();
   }
 
   Future<void> deleteAsync(Goal goal) async {
-    await _store.box<Goal>().removeAsync(goal.id);
+    await _box.removeAsync(goal.id);
     notifyListeners();
   }
 
   List<Goal> getAll() {
-    return _store.box<Goal>().getAll();
+    return _box.getAll();
   }
 }

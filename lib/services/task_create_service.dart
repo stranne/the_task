@@ -67,9 +67,9 @@ Example response:
     final timeOfDay = TimeOfDay.now();
     final tasksLatest20 = await taskService.get20LatestAsync();
 
-    final totalSkippedTasks = taskService.totalSkippedTasks();
-    final totalAbandonedTasks = taskService.totalAbandonedTasks();
-    final totalCompletedTasks = taskService.totalCompletedTasks();
+    final totalSkippedTasks = taskService.totalSkippedTasks;
+    final totalAbandonedTasks = taskService.totalAbandonedTasks;
+    final totalCompletedTasks = taskService.totalCompletedTasks;
 
     return '''
 Goal to create a task for:

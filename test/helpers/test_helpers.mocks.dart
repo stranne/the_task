@@ -22,6 +22,7 @@ import 'package:the_task/services/generative_service.dart' as _i17;
 import 'package:the_task/services/goal_service.dart' as _i9;
 import 'package:the_task/services/store_service.dart' as _i11;
 import 'package:the_task/services/task_create_service.dart' as _i19;
+import 'package:the_task/services/task_current_countdown_service.dart' as _i24;
 import 'package:the_task/services/task_current_service.dart' as _i12;
 import 'package:the_task/services/task_feedback_service.dart' as _i22;
 import 'package:the_task/services/task_feedback_type_service.dart' as _i20;
@@ -1085,6 +1086,16 @@ class MockTaskService extends _i1.Mock implements _i16.TaskService {
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+
+  @override
+  int getTodaysNumberOfTasks() => (super.noSuchMethod(
+        Invocation.method(
+          #getTodaysNumberOfTasks,
+          [],
+        ),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
 }
 
 /// A class which mocks [GenerativeService].
@@ -1258,4 +1269,61 @@ class MockTaskFeedbackService extends _i1.Mock
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
+}
+
+/// A class which mocks [TaskCurrentCountdownService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTaskCurrentCountdownService extends _i1.Mock
+    implements _i24.TaskCurrentCountdownService {
+  @override
+  double get progress => (super.noSuchMethod(
+        Invocation.getter(#progress),
+        returnValue: 0.0,
+        returnValueForMissingStub: 0.0,
+      ) as double);
+
+  @override
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  void listenToReactiveValues(List<dynamic>? reactiveValues) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #listenToReactiveValues,
+          [reactiveValues],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

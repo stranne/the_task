@@ -15,6 +15,7 @@ import '../services/generative_service.dart';
 import '../services/goal_service.dart';
 import '../services/store_service.dart';
 import '../services/task_create_service.dart';
+import '../services/task_current_countdown_service.dart';
 import '../services/task_current_service.dart';
 import '../services/task_feedback_service.dart';
 import '../services/task_feedback_type_service.dart';
@@ -50,4 +51,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => TaskService());
   locator.registerLazySingleton(() => TaskCreateService());
   locator.registerLazySingleton(() => TaskFeedbackService());
+  locator.registerLazySingleton(() => TaskCurrentCountdownService());
 }

@@ -6,7 +6,7 @@ import 'package:path/path.dart';
 class StoreService implements InitializableDependency {
   late Store _store;
 
-  Store get store => _store;
+  Box<T> getBox<T>() => _store.box<T>();
 
   @override
   Future<void> init() async {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/ui/widgets/task_current/task_current_countdown/task_current_countdown.dart';
+import 'package:the_task/ui/widgets/task_current/task_current_countdown/task_current_countdown_model.dart';
 
 import 'task_current_options_model.dart';
 
@@ -23,12 +25,19 @@ class TaskCurrentOptions extends StackedView<TaskCurrentOptionsModel> {
       children: [
         Expanded(
           child: SingleChildScrollView(
-            child: this.child,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: this.child,
+            ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: options,
+        const TaskCurrentCountdown(key: Key('TaskCurrentCountdown')),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: options,
+          ),
         ),
       ],
     );

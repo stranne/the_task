@@ -8,19 +8,13 @@ import 'package:the_task/models/task_current_feedback_sheet_data.dart';
 import 'package:the_task/models/task_current_state.dart';
 import 'package:the_task/models/task_feedback_type.dart';
 import 'package:the_task/models/task_state.dart';
-import 'package:the_task/objectbox.g.dart';
-import 'package:the_task/services/store_service.dart';
 import 'package:the_task/services/task_create_service.dart';
-import 'package:the_task/services/task_state_service.dart';
+import 'package:the_task/services/task_service.dart';
 
 class TaskCurrentService
     with ListenableServiceMixin
     implements InitializableDependency {
-  static final _waitingForApprovalId =
-      TaskStateService.mappings[TaskState.waitingForApproval]!;
-  static final _inProgressId = TaskStateService.mappings[TaskState.inProgress]!;
-
-  Store get _store => locator<StoreService>().store;
+  final _taskService = locator<TaskService>();
 
   @override
   Future<void> init() async {
@@ -47,15 +41,8 @@ class TaskCurrentService
   }
 
   TaskCurrentState get state => _state;
-  Future<Task?> getTaskOrNullAsync() async {
-    final query = _store
-        .box<Task>()
-        .query(Task_.stateId
-            .equals(_waitingForApprovalId)
-            .or(Task_.stateId.equals(_inProgressId)))
-        .build();
-    return await query.findUniqueAsync();
-  }
+  Future<Task?> getTaskOrNullAsync() async =>
+      await _taskService.getActiveOrNullAsync();
 
   Future<Task> getTaskAsync() async {
     final task = await getTaskOrNullAsync();
@@ -73,7 +60,7 @@ class TaskCurrentService
     try {
       final task = await locator<TaskCreateService>().createAsync();
 
-      await _store.box<Task>().putAsync(task);
+      await _taskService.putAsync(task);
       state = TaskCurrentState.waitingForApproval;
     } catch (e) {
       state = TaskCurrentState.creatingFailed;
@@ -136,15 +123,18 @@ class TaskCurrentService
   Future<void> _updateTaskStateAsync(
     TaskState newState,
   ) async {
+    final task = await getTaskAsync();
+
     if (newState != TaskState.inProgress) {
+      task.closed = DateTime.now().toUtc();
+
       // Make sure that we don't have a state that could result in displaying
       // a task when no task can be viewed after changing it's state
       state = TaskCurrentState.creating;
     }
 
-    final task = await getTaskAsync();
     task.state = newState;
-    await _store.box<Task>().putAsync(task);
+    await _taskService.putAsync(task);
   }
 
   Future<void> _askForFeedback(
