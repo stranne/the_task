@@ -21,7 +21,13 @@ class ProgressTaskList extends StackedView<ProgressTaskListModel> {
 
     return ListView.builder(
       itemCount: tasks.length,
-      itemBuilder: (context, index) => ProgressTaskListItem(task: tasks[index]),
+      itemBuilder: (context, index) {
+        final task = tasks[index];
+        return ProgressTaskListItem(
+          key: Key('ProgressTaskListItem_${task.id}'),
+          task: task,
+        );
+      },
     );
   }
 

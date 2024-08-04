@@ -20,8 +20,15 @@ class TaskCurrentNone extends StackedView<TaskCurrentNoneModel> {
           child: const Text('Create Task'),
         ),
       ],
+      scrollable: false,
       child: const Center(
-        child: Text('No current task'),
+        child: Text(
+          'No current task',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

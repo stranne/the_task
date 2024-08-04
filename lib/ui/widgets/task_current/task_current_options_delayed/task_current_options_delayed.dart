@@ -21,15 +21,15 @@ class TaskCurrentOptionsDelayed
     return Stack(
       children: [
         IgnorePointer(
-          ignoring: !viewModel.shouldDelay,
+          ignoring: viewModel.shouldDelay,
           child: this.child,
         ),
         Positioned.fill(
           child: IgnorePointer(
-            ignoring: viewModel.shouldDelay,
+            ignoring: !viewModel.shouldDelay,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 200),
-              opacity: viewModel.shouldDelay ? 0.0 : 1.0,
+              opacity: viewModel.shouldDelay ? 1.0 : 0.0,
               child: TweenAnimationBuilder<double>(
                 duration: const Duration(seconds: 5),
                 tween: Tween<double>(begin: 0.0, end: 1.0),

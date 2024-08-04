@@ -1,6 +1,8 @@
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:the_task/app/app.logger.dart';
 
 class GenerativeService {
+  final _logger = getLogger('GenerativeService');
   final GenerativeModel model = GenerativeModel(
     model: 'gemini-1.5-flash-latest',
     apiKey: const String.fromEnvironment("GEMININE_API_KEY"),
@@ -8,6 +10,11 @@ class GenerativeService {
 
   Future<String> generateAsync(String systemPrompt, String userPrompt) async {
     // Exceptions will be handled through TaskCurrentState.creatingFailed and displayed gracefully to the user
+    _logger.i('Generating content for System prompt: '
+        '$systemPrompt'
+        '\n\nUser prompt: '
+        '$userPrompt'
+        '');
     final content = [
       // TODO mark as system role when model supports it
       Content.text(systemPrompt),
@@ -20,7 +27,19 @@ class GenerativeService {
       ),
     );
 
-    // TODO better error handling
-    return response.text!;
+    final text = response.text;
+    _logger.i('Generated text: $text');
+
+    if (response.promptFeedback != null) {
+      throw Exception(
+          'Prompt feedback: ${response.promptFeedback?.blockReason}\n'
+          '${response.promptFeedback?.blockReasonMessage}');
+    }
+
+    if (text == null) {
+      throw Exception('No text generated');
+    }
+
+    return text;
   }
 }

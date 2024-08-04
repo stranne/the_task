@@ -4,7 +4,7 @@ import 'package:the_task/app/app.locator.dart';
 import 'package:the_task/services/task_service.dart';
 
 class TaskCurrentCountdownService with ListenableServiceMixin {
-  static const int _maxNumberOfTasksPerDay = 10;
+  static const int _maxNumberOfTasksPerDay = 20;
 
   late ReactiveValue<double> _progress;
 
@@ -19,6 +19,6 @@ class TaskCurrentCountdownService with ListenableServiceMixin {
 
   double _getProgress() {
     final todaysNumberOfTasks = locator<TaskService>().todaysNumberOfTasks;
-    return max(todaysNumberOfTasks / _maxNumberOfTasksPerDay, 1.0);
+    return min(todaysNumberOfTasks / _maxNumberOfTasksPerDay, 1.0);
   }
 }

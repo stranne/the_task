@@ -41,7 +41,8 @@ class TaskService
           .findAsync();
 
   Future<void> putAsync(Task task) async {
-    await _box.putAsync(task);
+    final id = await _box.putAsync(task);
+    task.id = id;
     _tasks.assignAll(await _box.getAllAsync());
   }
 

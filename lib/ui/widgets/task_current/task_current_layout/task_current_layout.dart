@@ -8,11 +8,13 @@ import 'task_current_layout_model.dart';
 class TaskCurrentLayout extends StackedView<TaskCurrentLayoutModel> {
   final Widget child;
   final List<Widget> options;
+  final bool scrollable;
 
   const TaskCurrentLayout({
     super.key,
     required this.child,
     required this.options,
+    this.scrollable = true,
   });
 
   @override
@@ -24,15 +26,16 @@ class TaskCurrentLayout extends StackedView<TaskCurrentLayoutModel> {
     return Column(
       children: [
         Expanded(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: this.child,
-            ),
-          ),
+          child: scrollable
+              ? SingleChildScrollView(
+                  child: _buildContent(),
+                )
+              : _buildContent(),
         ),
-        const TaskCurrentCountdown(),
-        TaskCurrentOptions(options: options),
+        if (viewModel.hasAnyGoals) ...[
+          const TaskCurrentCountdown(),
+          TaskCurrentOptions(options: options),
+        ]
       ],
     );
   }
@@ -42,4 +45,9 @@ class TaskCurrentLayout extends StackedView<TaskCurrentLayoutModel> {
     BuildContext context,
   ) =>
       TaskCurrentLayoutModel();
+
+  Widget _buildContent() => Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: child,
+      );
 }

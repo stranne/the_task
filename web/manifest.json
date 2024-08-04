@@ -1,6 +1,6 @@
 {
-    "name": "the_task",
-    "short_name": "the_task",
+    "name": "The Task",
+    "short_name": "The Task",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -16,18 +16,16 @@ class GoalList extends StackedView<GoalListModel> {
   ) {
     final goals = viewModel.goals;
 
-    if (goals.isEmpty) {
-      return const GoalListEmpty();
-    }
-
     return Scaffold(
-      body: ListView.builder(
-        itemCount: goals.length,
-        itemBuilder: (context, index) {
-          final goal = goals[index];
-          return GoalListItem(goal: goal);
-        },
-      ),
+      body: goals.isEmpty
+          ? const GoalListEmpty()
+          : ListView.builder(
+              itemCount: goals.length,
+              itemBuilder: (context, index) {
+                final goal = goals[index];
+                return GoalListItem(goal: goal);
+              },
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           viewModel.addGoal();

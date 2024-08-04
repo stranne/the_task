@@ -17,6 +17,7 @@ import '../services/locale_service.dart';
 import '../services/store_service.dart';
 import '../services/task_create_service.dart';
 import '../services/task_current_countdown_service.dart';
+import '../services/task_current_options_delayed_service.dart';
 import '../services/task_current_service.dart';
 import '../services/task_feedback_service.dart';
 import '../services/task_feedback_type_service.dart';
@@ -59,5 +60,6 @@ Future<void> setupLocator({
 
   locator.registerLazySingleton(() => TaskCreateService());
   locator.registerLazySingleton(() => TaskFeedbackService());
+  locator.registerLazySingleton(() => TaskCurrentOptionsDelayedService());
   locator.registerSingleton(LocaleService());
 }

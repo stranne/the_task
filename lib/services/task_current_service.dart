@@ -3,6 +3,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:the_task/app/app.bottomsheets.dart';
 import 'package:the_task/app/app.locator.dart';
+import 'package:the_task/app/app.logger.dart';
 import 'package:the_task/models/task.dart';
 import 'package:the_task/models/task_current_feedback_sheet_data.dart';
 import 'package:the_task/models/task_current_state.dart';
@@ -14,6 +15,7 @@ import 'package:the_task/services/task_service.dart';
 class TaskCurrentService
     with ListenableServiceMixin
     implements InitializableDependency {
+  final _logger = getLogger('TaskCurrentService');
   final _taskService = locator<TaskService>();
 
   late final ReactiveValue<Task?> _task;
@@ -50,6 +52,7 @@ class TaskCurrentService
       _task.value = task;
       _state.value = TaskCurrentState.waitingForApproval;
     } catch (e) {
+      _logger.e('Failed to create a task', e);
       _state.value = TaskCurrentState.creatingFailed;
     }
   }
@@ -57,7 +60,7 @@ class TaskCurrentService
   Future<void> skipAsync(Task task) async {
     assert(state == TaskCurrentState.waitingForApproval);
 
-    await _askForFeedback(task, [
+    await _askForFeedbackAsync(task, [
       TaskFeedbackType.notRelevant,
       TaskFeedbackType.tooBasic,
       TaskFeedbackType.alreadyDone,
@@ -79,7 +82,7 @@ class TaskCurrentService
   Future<void> abandonAsync(Task task) async {
     assert(state == TaskCurrentState.active);
 
-    await _askForFeedback(
+    await _askForFeedbackAsync(
       task,
       [
         TaskFeedbackType.tooDificult,
@@ -96,7 +99,7 @@ class TaskCurrentService
   Future<void> completeAsync(Task task) async {
     assert(state == TaskCurrentState.active);
 
-    await _askForFeedback(task, [
+    await _askForFeedbackAsync(task, [
       TaskFeedbackType.challangingButDoable,
       TaskFeedbackType.clearInstructions,
       TaskFeedbackType.enjoyableTask,
@@ -110,6 +113,7 @@ class TaskCurrentService
   Future<void> _updateTaskStateAsync(
     TaskState newState,
   ) async {
+    _logger.i('Updating task state to $newState');
     final task = _task.value!;
     if (newState != TaskState.inProgress) {
       task.closed = DateTime.now().toUtc();
@@ -124,7 +128,7 @@ class TaskCurrentService
     await _taskService.putAsync(task);
   }
 
-  Future<void> _askForFeedback(
+  Future<void> _askForFeedbackAsync(
     Task task,
     List<TaskFeedbackType> feedbackTypes,
   ) async =>

@@ -47,6 +47,11 @@ class TaskItem extends StackedView<TaskItemModel> {
           Text(task.description),
           verticalSpaceMedium,
           if (goal != null) ...[
+            Text(
+              'Goal',
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center,
+            ),
             Text(goal.title),
             verticalSpaceMedium,
           ],

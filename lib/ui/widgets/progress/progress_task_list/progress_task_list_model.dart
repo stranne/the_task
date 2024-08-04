@@ -10,5 +10,5 @@ class ProgressTaskListModel extends ReactiveViewModel {
   List<ListenableServiceMixin> get listenableServices => [_taskService];
 
   List<Task> get tasks =>
-      _taskService.tasks..sort((a, b) => a.id.compareTo(-b.id));
+      _taskService.tasks..sort((a, b) => a.created.compareTo(b.created) * -1);
 }

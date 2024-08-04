@@ -1,3 +1,4 @@
+import 'package:the_task/services/task_current_options_delayed_service.dart';
 import 'package:the_task/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:the_task/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:the_task/ui/views/home/home_view.dart';
@@ -44,6 +45,7 @@ import 'package:the_task/services/locale_service.dart';
     InitializableSingleton(classType: GoalService),
     LazySingleton(classType: TaskCreateService),
     LazySingleton(classType: TaskFeedbackService),
+    LazySingleton(classType: TaskCurrentOptionsDelayedService),
     Singleton(classType: LocaleService),
 // @stacked-service
   ],
@@ -56,5 +58,6 @@ import 'package:the_task/services/locale_service.dart';
     StackedDialog(classType: InfoAlertDialog),
     // @stacked-dialog
   ],
+  logger: StackedLogger(),
 )
 class App {}
