@@ -16,9 +16,19 @@ class TaskCurrentService
     implements InitializableDependency {
   final _taskService = locator<TaskService>();
 
+  late final ReactiveValue<Task?> _task;
+  Task? get task => _task.value;
+
+  late final ReactiveValue<TaskCurrentState> _state;
+  TaskCurrentState get state => _state.value;
+
   @override
   Future<void> init() async {
-    final task = await getTaskOrNullAsync();
+    final task = await _taskService.getActiveOrNullAsync();
+    _task = ReactiveValue<Task?>(task);
+    listenToReactiveValues([_task]);
+
+    TaskCurrentState state;
     switch (task?.state) {
       case TaskState.waitingForApproval:
         state = TaskCurrentState.waitingForApproval;
@@ -29,41 +39,18 @@ class TaskCurrentService
       default:
         state = TaskCurrentState.none;
     }
-  }
-
-  TaskCurrentState _state = TaskCurrentState.none;
-  set state(TaskCurrentState value) {
-    final shouldNotify = value != _state;
-    _state = value;
-    if (shouldNotify) {
-      notifyListeners();
-    }
-  }
-
-  TaskCurrentState get state => _state;
-  Future<Task?> getTaskOrNullAsync() async =>
-      await _taskService.getActiveOrNullAsync();
-
-  Future<Task> getTaskAsync() async {
-    final task = await getTaskOrNullAsync();
-
-    if (task == null) {
-      throw Exception(
-          'Tried to find current task in store but could not find one.');
-    }
-
-    return task;
+    _state = ReactiveValue<TaskCurrentState>(state);
   }
 
   Future<void> createAsync() async {
-    state = TaskCurrentState.creating;
+    _state.value = TaskCurrentState.creating;
     try {
       final task = await locator<TaskCreateService>().createAsync();
-
       await _taskService.putAsync(task);
-      state = TaskCurrentState.waitingForApproval;
+      _task.value = task;
+      _state.value = TaskCurrentState.waitingForApproval;
     } catch (e) {
-      state = TaskCurrentState.creatingFailed;
+      _state.value = TaskCurrentState.creatingFailed;
     }
   }
 
@@ -86,7 +73,7 @@ class TaskCurrentService
 
     await _updateTaskStateAsync(TaskState.inProgress);
 
-    state = TaskCurrentState.active;
+    _state.value = TaskCurrentState.active;
   }
 
   Future<void> abandonAsync(Task task) async {
@@ -123,14 +110,14 @@ class TaskCurrentService
   Future<void> _updateTaskStateAsync(
     TaskState newState,
   ) async {
-    final task = await getTaskAsync();
-
+    final task = _task.value!;
     if (newState != TaskState.inProgress) {
       task.closed = DateTime.now().toUtc();
 
       // Make sure that we don't have a state that could result in displaying
       // a task when no task can be viewed after changing it's state
-      state = TaskCurrentState.creating;
+      _state.value = TaskCurrentState.creating;
+      _task.value = null;
     }
 
     task.state = newState;

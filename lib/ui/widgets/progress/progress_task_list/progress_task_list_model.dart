@@ -3,9 +3,12 @@ import 'package:the_task/app/app.locator.dart';
 import 'package:the_task/models/task.dart';
 import 'package:the_task/services/task_service.dart';
 
-class ProgressTaskListModel extends FutureViewModel<List<Task>> {
+class ProgressTaskListModel extends ReactiveViewModel {
+  final _taskService = locator<TaskService>();
+
   @override
-  Future<List<Task>> futureToRun() async =>
-      await locator<TaskService>().getAllAsync()
-        ..sort((a, b) => a.id.compareTo(-b.id));
+  List<ListenableServiceMixin> get listenableServices => [_taskService];
+
+  List<Task> get tasks =>
+      _taskService.tasks..sort((a, b) => a.id.compareTo(-b.id));
 }

@@ -1,4 +1,5 @@
 import 'package:stacked/stacked.dart';
+import 'package:stacked_shared/stacked_shared.dart';
 import 'package:the_task/app/app.locator.dart';
 import 'package:the_task/models/task.dart';
 import 'package:the_task/models/task_state.dart';
@@ -6,14 +7,24 @@ import 'package:the_task/objectbox.g.dart';
 import 'package:the_task/services/store_service.dart';
 import 'package:the_task/services/task_state_service.dart';
 
-class TaskService with ListenableServiceMixin {
+class TaskService
+    with ListenableServiceMixin
+    implements InitializableDependency {
   static final _waitingForApprovalId =
       TaskStateService.mappings[TaskState.waitingForApproval]!;
   static final _inProgressId = TaskStateService.mappings[TaskState.inProgress]!;
 
+  late final ReactiveList<Task> _tasks;
+  List<Task> get tasks => _tasks;
+
   Box<Task> get _box => locator<StoreService>().getBox<Task>();
 
-  Future<List<Task>> getAllAsync() => _box.getAllAsync();
+  @override
+  Future<void> init() async {
+    final tasks = await _box.getAllAsync();
+    _tasks = ReactiveList<Task>.from(tasks);
+    listenToReactiveValues([_tasks]);
+  }
 
   Future<Task?> getActiveOrNullAsync() async {
     final query = _box
@@ -31,7 +42,7 @@ class TaskService with ListenableServiceMixin {
 
   Future<void> putAsync(Task task) async {
     await _box.putAsync(task);
-    notifyListeners();
+    _tasks.assignAll(await _box.getAllAsync());
   }
 
   int get totalSkippedTasks => _countStatus(TaskState.skipped);

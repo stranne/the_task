@@ -11,7 +11,7 @@ class GoalListModel extends ReactiveViewModel {
   @override
   List<ListenableServiceMixin> get listenableServices => [_goalService];
 
-  List<Goal> get goals => _goalService.getAll();
+  List<Goal> get goals => _goalService.goals;
 
   void addGoal() =>
       locator<NavigationService>().navigateTo(Routes.goalCreateView);

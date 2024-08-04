@@ -12,6 +12,7 @@ import 'package:the_task/services/task_create_service.dart';
 import 'package:the_task/services/task_feedback_type_service.dart';
 import 'package:the_task/services/task_feedback_service.dart';
 import 'package:the_task/services/task_current_countdown_service.dart';
+import 'package:the_task/services/task_current_options_delayed_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -31,6 +32,8 @@ import 'test_helpers.mocks.dart';
   MockSpec<TaskFeedbackService>(onMissingStub: OnMissingStub.returnDefault),
   MockSpec<TaskCurrentCountdownService>(
       onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<TaskCurrentOptionsDelayedService>(
+      onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -47,6 +50,7 @@ void registerServices() {
   getAndRegisterTaskFeedbackTypeService();
   getAndRegisterTaskFeedbackService();
   getAndRegisterTaskCurrentCountdownService();
+  getAndRegisterTaskCurrentOptionsDelayedService();
 // @stacked-mock-register
 }
 
@@ -167,6 +171,14 @@ MockTaskCurrentCountdownService getAndRegisterTaskCurrentCountdownService() {
   _removeRegistrationIfExists<TaskCurrentCountdownService>();
   final service = MockTaskCurrentCountdownService();
   locator.registerSingleton<TaskCurrentCountdownService>(service);
+  return service;
+}
+
+MockTaskCurrentOptionsDelayedService
+    getAndRegisterTaskCurrentOptionsDelayedService() {
+  _removeRegistrationIfExists<TaskCurrentOptionsDelayedService>();
+  final service = MockTaskCurrentOptionsDelayedService();
+  locator.registerSingleton<TaskCurrentOptionsDelayedService>(service);
   return service;
 }
 // @stacked-mock-create

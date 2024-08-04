@@ -23,6 +23,8 @@ import 'package:the_task/services/goal_service.dart' as _i9;
 import 'package:the_task/services/store_service.dart' as _i11;
 import 'package:the_task/services/task_create_service.dart' as _i19;
 import 'package:the_task/services/task_current_countdown_service.dart' as _i24;
+import 'package:the_task/services/task_current_options_delayed_service.dart'
+    as _i25;
 import 'package:the_task/services/task_current_service.dart' as _i12;
 import 'package:the_task/services/task_feedback_service.dart' as _i22;
 import 'package:the_task/services/task_feedback_type_service.dart' as _i20;
@@ -42,8 +44,8 @@ import 'package:the_task/services/task_state_service.dart' as _i14;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeStore_0 extends _i1.SmartFake implements _i2.Store {
-  _FakeStore_0(
+class _FakeBox_0<T1> extends _i1.SmartFake implements _i2.Box<T1> {
+  _FakeBox_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -714,11 +716,28 @@ class MockDialogService extends _i1.Mock implements _i4.DialogService {
 /// See the documentation for Mockito's code generation for more information.
 class MockGoalService extends _i1.Mock implements _i9.GoalService {
   @override
+  List<_i10.Goal> get goals => (super.noSuchMethod(
+        Invocation.getter(#goals),
+        returnValue: <_i10.Goal>[],
+        returnValueForMissingStub: <_i10.Goal>[],
+      ) as List<_i10.Goal>);
+
+  @override
   int get listenersCount => (super.noSuchMethod(
         Invocation.getter(#listenersCount),
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
+
+  @override
+  _i7.Future<void> init() => (super.noSuchMethod(
+        Invocation.method(
+          #init,
+          [],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
   _i7.Future<void> createAsync(_i10.Goal? goal) => (super.noSuchMethod(
@@ -749,16 +768,6 @@ class MockGoalService extends _i1.Mock implements _i9.GoalService {
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
-
-  @override
-  List<_i10.Goal> getAll() => (super.noSuchMethod(
-        Invocation.method(
-          #getAll,
-          [],
-        ),
-        returnValue: <_i10.Goal>[],
-        returnValueForMissingStub: <_i10.Goal>[],
-      ) as List<_i10.Goal>);
 
   @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>
@@ -803,17 +812,26 @@ class MockGoalService extends _i1.Mock implements _i9.GoalService {
 /// See the documentation for Mockito's code generation for more information.
 class MockStoreService extends _i1.Mock implements _i11.StoreService {
   @override
-  _i2.Store get store => (super.noSuchMethod(
-        Invocation.getter(#store),
-        returnValue: _FakeStore_0(
-          this,
-          Invocation.getter(#store),
+  _i2.Box<T> getBox<T>() => (super.noSuchMethod(
+        Invocation.method(
+          #getBox,
+          [],
         ),
-        returnValueForMissingStub: _FakeStore_0(
+        returnValue: _FakeBox_0<T>(
           this,
-          Invocation.getter(#store),
+          Invocation.method(
+            #getBox,
+            [],
+          ),
         ),
-      ) as _i2.Store);
+        returnValueForMissingStub: _FakeBox_0<T>(
+          this,
+          Invocation.method(
+            #getBox,
+            [],
+          ),
+        ),
+      ) as _i2.Box<T>);
 
   @override
   _i7.Future<void> init() => (super.noSuchMethod(
@@ -831,15 +849,6 @@ class MockStoreService extends _i1.Mock implements _i11.StoreService {
 /// See the documentation for Mockito's code generation for more information.
 class MockTaskCurrentService extends _i1.Mock
     implements _i12.TaskCurrentService {
-  @override
-  set state(_i13.TaskCurrentState? value) => super.noSuchMethod(
-        Invocation.setter(
-          #state,
-          value,
-        ),
-        returnValueForMissingStub: null,
-      );
-
   @override
   _i13.TaskCurrentState get state => (super.noSuchMethod(
         Invocation.getter(#state),
@@ -863,38 +872,6 @@ class MockTaskCurrentService extends _i1.Mock
         returnValue: _i7.Future<void>.value(),
         returnValueForMissingStub: _i7.Future<void>.value(),
       ) as _i7.Future<void>);
-
-  @override
-  _i7.Future<_i3.Task?> getTaskOrNullAsync() => (super.noSuchMethod(
-        Invocation.method(
-          #getTaskOrNullAsync,
-          [],
-        ),
-        returnValue: _i7.Future<_i3.Task?>.value(),
-        returnValueForMissingStub: _i7.Future<_i3.Task?>.value(),
-      ) as _i7.Future<_i3.Task?>);
-
-  @override
-  _i7.Future<_i3.Task> getTaskAsync() => (super.noSuchMethod(
-        Invocation.method(
-          #getTaskAsync,
-          [],
-        ),
-        returnValue: _i7.Future<_i3.Task>.value(_FakeTask_1(
-          this,
-          Invocation.method(
-            #getTaskAsync,
-            [],
-          ),
-        )),
-        returnValueForMissingStub: _i7.Future<_i3.Task>.value(_FakeTask_1(
-          this,
-          Invocation.method(
-            #getTaskAsync,
-            [],
-          ),
-        )),
-      ) as _i7.Future<_i3.Task>);
 
   @override
   _i7.Future<void> createAsync() => (super.noSuchMethod(
@@ -1036,15 +1013,66 @@ class MockTaskStateService extends _i1.Mock implements _i14.TaskStateService {
 /// See the documentation for Mockito's code generation for more information.
 class MockTaskService extends _i1.Mock implements _i16.TaskService {
   @override
-  _i7.Future<List<_i3.Task>> getAllAsync() => (super.noSuchMethod(
+  List<_i3.Task> get tasks => (super.noSuchMethod(
+        Invocation.getter(#tasks),
+        returnValue: <_i3.Task>[],
+        returnValueForMissingStub: <_i3.Task>[],
+      ) as List<_i3.Task>);
+
+  @override
+  int get totalSkippedTasks => (super.noSuchMethod(
+        Invocation.getter(#totalSkippedTasks),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  int get totalAbandonedTasks => (super.noSuchMethod(
+        Invocation.getter(#totalAbandonedTasks),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  int get totalCompletedTasks => (super.noSuchMethod(
+        Invocation.getter(#totalCompletedTasks),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  int get todaysNumberOfTasks => (super.noSuchMethod(
+        Invocation.getter(#todaysNumberOfTasks),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  _i7.Future<void> init() => (super.noSuchMethod(
         Invocation.method(
-          #getAllAsync,
+          #init,
           [],
         ),
-        returnValue: _i7.Future<List<_i3.Task>>.value(<_i3.Task>[]),
-        returnValueForMissingStub:
-            _i7.Future<List<_i3.Task>>.value(<_i3.Task>[]),
-      ) as _i7.Future<List<_i3.Task>>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<_i3.Task?> getActiveOrNullAsync() => (super.noSuchMethod(
+        Invocation.method(
+          #getActiveOrNullAsync,
+          [],
+        ),
+        returnValue: _i7.Future<_i3.Task?>.value(),
+        returnValueForMissingStub: _i7.Future<_i3.Task?>.value(),
+      ) as _i7.Future<_i3.Task?>);
 
   @override
   _i7.Future<List<_i3.Task>> get20LatestAsync() => (super.noSuchMethod(
@@ -1058,44 +1086,51 @@ class MockTaskService extends _i1.Mock implements _i16.TaskService {
       ) as _i7.Future<List<_i3.Task>>);
 
   @override
-  int totalSkippedTasks() => (super.noSuchMethod(
+  _i7.Future<void> putAsync(_i3.Task? task) => (super.noSuchMethod(
         Invocation.method(
-          #totalSkippedTasks,
-          [],
+          #putAsync,
+          [task],
         ),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 
   @override
-  int totalAbandonedTasks() => (super.noSuchMethod(
+  void listenToReactiveValues(List<dynamic>? reactiveValues) =>
+      super.noSuchMethod(
         Invocation.method(
-          #totalAbandonedTasks,
-          [],
+          #listenToReactiveValues,
+          [reactiveValues],
         ),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
+        returnValueForMissingStub: null,
+      );
 
   @override
-  int totalCompletedTasks() => (super.noSuchMethod(
+  void addListener(void Function()? listener) => super.noSuchMethod(
         Invocation.method(
-          #totalCompletedTasks,
-          [],
+          #addListener,
+          [listener],
         ),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
+        returnValueForMissingStub: null,
+      );
 
   @override
-  int getTodaysNumberOfTasks() => (super.noSuchMethod(
+  void removeListener(void Function()? listener) => super.noSuchMethod(
         Invocation.method(
-          #getTodaysNumberOfTasks,
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
           [],
         ),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
+        returnValueForMissingStub: null,
+      );
 }
 
 /// A class which mocks [GenerativeService].
@@ -1327,3 +1362,9 @@ class MockTaskCurrentCountdownService extends _i1.Mock
         returnValueForMissingStub: null,
       );
 }
+
+/// A class which mocks [TaskCurrentOptionsDelayedService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTaskCurrentOptionsDelayedService extends _i1.Mock
+    implements _i25.TaskCurrentOptionsDelayedService {}

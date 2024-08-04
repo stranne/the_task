@@ -36,20 +36,26 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => NavigationService());
-  locator.registerLazySingleton(() => GenerativeService());
-  locator.registerLazySingleton(() => TaskStateService());
-  locator.registerLazySingleton(() => TaskFeedbackTypeService());
   final storeService = StoreService();
   await storeService.init();
   locator.registerSingleton(storeService);
+
+  locator.registerLazySingleton(() => GenerativeService());
+  locator.registerLazySingleton(() => TaskStateService());
+  locator.registerLazySingleton(() => TaskFeedbackTypeService());
+  final taskService = TaskService();
+  await taskService.init();
+  locator.registerSingleton(taskService);
 
   final taskCurrentService = TaskCurrentService();
   await taskCurrentService.init();
   locator.registerSingleton(taskCurrentService);
 
-  locator.registerLazySingleton(() => GoalService());
-  locator.registerLazySingleton(() => TaskService());
+  locator.registerLazySingleton(() => TaskCurrentCountdownService());
+  final goalService = GoalService();
+  await goalService.init();
+  locator.registerSingleton(goalService);
+
   locator.registerLazySingleton(() => TaskCreateService());
   locator.registerLazySingleton(() => TaskFeedbackService());
-  locator.registerLazySingleton(() => TaskCurrentCountdownService());
 }

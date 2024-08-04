@@ -29,17 +29,20 @@ class TaskItem extends StackedView<TaskItemModel> {
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (!hideTitle) ...[
             Text(
               task.title,
               style: Theme.of(context).textTheme.headlineSmall,
+              textAlign: TextAlign.center,
             ),
             verticalSpaceMedium,
           ],
           Text(
             'Description',
             style: Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.center,
           ),
           Text(task.description),
           verticalSpaceMedium,
@@ -50,12 +53,14 @@ class TaskItem extends StackedView<TaskItemModel> {
           Text(
             'Why',
             style: Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.center,
           ),
           Text(task.why),
           verticalSpaceMedium,
           Text(
             'Step-by-step',
             style: Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.center,
           ),
           OrderedList(
             items: task.stepByStep
@@ -69,6 +74,7 @@ class TaskItem extends StackedView<TaskItemModel> {
             Text(
               'Feedback',
               style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center,
             ),
             OrderedList(
               items: feedback.types

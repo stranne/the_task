@@ -22,7 +22,7 @@ class TaskCreateService {
   }
 
   Future<Goal> _selectGoalAsync() async {
-    final goals = locator<GoalService>().getAll();
+    final goals = locator<GoalService>().goals;
     final random = Random();
     return goals[random.nextInt(goals.length)];
   }

@@ -25,6 +25,7 @@ class OrderedList extends StackedView<OrderedListModel> {
       children: items
           .map(
             (item) => ListTile(
+              dense: true,
               leading: Text(
                 '${items.indexOf(item) + 1}',
                 style: Theme.of(context).textTheme.bodySmall,

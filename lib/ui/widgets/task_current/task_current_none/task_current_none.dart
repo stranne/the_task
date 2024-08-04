@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:the_task/ui/widgets/task_current/task_current_options/task_current_options.dart';
+import 'package:the_task/ui/widgets/task_current/task_current_layout/task_current_layout.dart';
 
 import 'task_current_none_model.dart';
 
@@ -13,7 +13,7 @@ class TaskCurrentNone extends StackedView<TaskCurrentNoneModel> {
     TaskCurrentNoneModel viewModel,
     Widget? child,
   ) {
-    return TaskCurrentOptions(
+    return TaskCurrentLayout(
       options: [
         ElevatedButton(
           onPressed: viewModel.createTaskAsync,
