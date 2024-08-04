@@ -13,6 +13,7 @@ import 'package:stacked_shared/stacked_shared.dart';
 
 import '../services/generative_service.dart';
 import '../services/goal_service.dart';
+import '../services/locale_service.dart';
 import '../services/store_service.dart';
 import '../services/task_create_service.dart';
 import '../services/task_current_countdown_service.dart';
@@ -58,4 +59,5 @@ Future<void> setupLocator({
 
   locator.registerLazySingleton(() => TaskCreateService());
   locator.registerLazySingleton(() => TaskFeedbackService());
+  locator.registerSingleton(LocaleService());
 }

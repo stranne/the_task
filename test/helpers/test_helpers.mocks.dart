@@ -20,6 +20,7 @@ import 'package:the_task/models/task_state.dart' as _i15;
 import 'package:the_task/objectbox.g.dart' as _i2;
 import 'package:the_task/services/generative_service.dart' as _i17;
 import 'package:the_task/services/goal_service.dart' as _i9;
+import 'package:the_task/services/locale_service.dart' as _i26;
 import 'package:the_task/services/store_service.dart' as _i11;
 import 'package:the_task/services/task_create_service.dart' as _i19;
 import 'package:the_task/services/task_current_countdown_service.dart' as _i24;
@@ -1367,4 +1368,122 @@ class MockTaskCurrentCountdownService extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTaskCurrentOptionsDelayedService extends _i1.Mock
-    implements _i25.TaskCurrentOptionsDelayedService {}
+    implements _i25.TaskCurrentOptionsDelayedService {
+  @override
+  bool get shouldDelay => (super.noSuchMethod(
+        Invocation.getter(#shouldDelay),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  void delayDone() => super.noSuchMethod(
+        Invocation.method(
+          #delayDone,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void listenToReactiveValues(List<dynamic>? reactiveValues) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #listenToReactiveValues,
+          [reactiveValues],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [LocaleService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocaleService extends _i1.Mock implements _i26.LocaleService {
+  @override
+  int get listenersCount => (super.noSuchMethod(
+        Invocation.getter(#listenersCount),
+        returnValue: 0,
+        returnValueForMissingStub: 0,
+      ) as int);
+
+  @override
+  void setLocale(_i8.Locale? locale) => super.noSuchMethod(
+        Invocation.method(
+          #setLocale,
+          [locale],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void listenToReactiveValues(List<dynamic>? reactiveValues) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #listenToReactiveValues,
+          [reactiveValues],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #addListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void removeListener(void Function()? listener) => super.noSuchMethod(
+        Invocation.method(
+          #removeListener,
+          [listener],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void notifyListeners() => super.noSuchMethod(
+        Invocation.method(
+          #notifyListeners,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+}

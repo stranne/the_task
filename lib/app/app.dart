@@ -18,6 +18,7 @@ import 'package:the_task/ui/bottom_sheets/task_current_feedback/task_current_fee
 import 'package:the_task/services/task_feedback_type_service.dart';
 import 'package:the_task/services/task_feedback_service.dart';
 import 'package:the_task/services/task_current_countdown_service.dart';
+import 'package:the_task/services/locale_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -43,6 +44,7 @@ import 'package:the_task/services/task_current_countdown_service.dart';
     InitializableSingleton(classType: GoalService),
     LazySingleton(classType: TaskCreateService),
     LazySingleton(classType: TaskFeedbackService),
+    Singleton(classType: LocaleService),
 // @stacked-service
   ],
   bottomsheets: [

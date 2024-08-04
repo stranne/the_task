@@ -13,6 +13,7 @@ import 'package:the_task/services/task_feedback_type_service.dart';
 import 'package:the_task/services/task_feedback_service.dart';
 import 'package:the_task/services/task_current_countdown_service.dart';
 import 'package:the_task/services/task_current_options_delayed_service.dart';
+import 'package:the_task/services/locale_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -34,6 +35,7 @@ import 'test_helpers.mocks.dart';
       onMissingStub: OnMissingStub.returnDefault),
   MockSpec<TaskCurrentOptionsDelayedService>(
       onMissingStub: OnMissingStub.returnDefault),
+  MockSpec<LocaleService>(onMissingStub: OnMissingStub.returnDefault),
 // @stacked-mock-spec
 ])
 void registerServices() {
@@ -51,6 +53,7 @@ void registerServices() {
   getAndRegisterTaskFeedbackService();
   getAndRegisterTaskCurrentCountdownService();
   getAndRegisterTaskCurrentOptionsDelayedService();
+  getAndRegisterLocaleService();
 // @stacked-mock-register
 }
 
@@ -179,6 +182,13 @@ MockTaskCurrentOptionsDelayedService
   _removeRegistrationIfExists<TaskCurrentOptionsDelayedService>();
   final service = MockTaskCurrentOptionsDelayedService();
   locator.registerSingleton<TaskCurrentOptionsDelayedService>(service);
+  return service;
+}
+
+MockLocaleService getAndRegisterLocaleService() {
+  _removeRegistrationIfExists<LocaleService>();
+  final service = MockLocaleService();
+  locator.registerSingleton<LocaleService>(service);
   return service;
 }
 // @stacked-mock-create

@@ -7,6 +7,7 @@ import 'package:the_task/models/goal.dart';
 import 'package:the_task/models/task.dart';
 import 'package:the_task/services/generative_service.dart';
 import 'package:the_task/services/goal_service.dart';
+import 'package:the_task/services/locale_service.dart';
 import 'package:the_task/services/task_feedback_type_service.dart';
 import 'package:the_task/services/task_service.dart';
 import 'package:the_task/services/task_state_service.dart';
@@ -67,6 +68,8 @@ Example response:
     final timeOfDay = TimeOfDay.now();
     final tasksLatest20 = await taskService.get20LatestAsync();
 
+    final locale = locator<LocaleService>().locale;
+
     final totalSkippedTasks = taskService.totalSkippedTasks;
     final totalAbandonedTasks = taskService.totalAbandonedTasks;
     final totalCompletedTasks = taskService.totalCompletedTasks;
@@ -77,6 +80,7 @@ Goal to create a task for:
 
 Meta data:
 - Current time of day: ${timeOfDay.hour}:${timeOfDay.minute}
+${locale != null ? '- Users current locale: ${locale.toLanguageTag()}' : ''}
 - Total skipped tasks: $totalSkippedTasks
 - Total abandoned tasks: $totalAbandonedTasks
 - Total completed tasks: $totalCompletedTasks
@@ -108,13 +112,15 @@ ${_createPromptTaskItemFeedback(task)}
       return '';
     }
 
-    var text = '  - Feedback:';
+    final buffer = StringBuffer();
+    buffer.writeln('  - Feedback:');
     for (var type in feedback.types) {
-      text += '\n    - ${taskFeedbackTypeService.toText(type)}';
+      buffer.writeln('    - ${taskFeedbackTypeService.toText(type)}');
     }
     if (feedback.comment != null) {
-      text += '\n    - Comment: ${feedback.comment}';
+      buffer.writeln('    - Comment: ${feedback.comment}');
     }
-    return text;
+
+    return buffer.toString();
   }
 }

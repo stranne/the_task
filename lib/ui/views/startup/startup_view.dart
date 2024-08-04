@@ -48,7 +48,7 @@ class StartupView extends StackedView<StartupViewModel> {
   StartupViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      StartupViewModel();
+      StartupViewModel(Localizations.localeOf(context));
 
   @override
   void onViewModelReady(StartupViewModel viewModel) => SchedulerBinding.instance
