@@ -46,6 +46,11 @@ class TaskService
     _tasks.assignAll(await _box.getAllAsync());
   }
 
+  Future<void> deleteAsync(Task task) async {
+    await _box.removeAsync(task.id);
+    _tasks.assignAll(await _box.getAllAsync());
+  }
+
   int get totalSkippedTasks => _countStatus(TaskState.skipped);
 
   int get totalAbandonedTasks => _countStatus(TaskState.abandoned);

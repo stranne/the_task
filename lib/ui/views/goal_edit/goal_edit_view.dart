@@ -22,6 +22,13 @@ class GoalEditView extends StackedView<GoalEditViewModel> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Goal'),
+        actions: [
+          IconButton(
+            tooltip: 'Delete goal',
+            icon: const Icon(Icons.delete),
+            onPressed: () => viewModel.deleteAsync(goal),
+          ),
+        ],
       ),
       body: GoalForm.edit(
         goal: goal,

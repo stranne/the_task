@@ -22,6 +22,13 @@ class TaskItemView extends StackedView<TaskItemViewModel> {
     return Scaffold(
       appBar: AppBar(
         title: Text(task.title),
+        actions: [
+          IconButton(
+            tooltip: 'Delete task',
+            icon: const Icon(Icons.delete),
+            onPressed: () => viewModel.deleteAsync(task),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

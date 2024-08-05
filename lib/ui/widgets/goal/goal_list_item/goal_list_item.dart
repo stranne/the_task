@@ -20,10 +20,6 @@ class GoalListItem extends StackedView<GoalListItemModel> {
   ) {
     return ListTile(
       title: Text(goal.title),
-      trailing: IconButton(
-        icon: const Icon(Icons.delete),
-        onPressed: () => viewModel.delete(goal),
-      ),
       onTap: () => viewModel.edit(goal),
     );
   }

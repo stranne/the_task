@@ -9,4 +9,9 @@ class GoalEditViewModel extends BaseViewModel {
     await locator<GoalService>().updateAsync(goal);
     locator<NavigationService>().back();
   }
+
+  Future<void> deleteAsync(Goal goal) async {
+    await locator<GoalService>().deleteAsync(goal);
+    locator<NavigationService>().back();
+  }
 }
