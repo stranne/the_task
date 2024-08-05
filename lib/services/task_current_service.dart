@@ -9,6 +9,7 @@ import 'package:the_task/models/task_current_feedback_sheet_data.dart';
 import 'package:the_task/models/task_current_state.dart';
 import 'package:the_task/models/task_feedback_type.dart';
 import 'package:the_task/models/task_state.dart';
+import 'package:the_task/services/goal_service.dart';
 import 'package:the_task/services/task_create_service.dart';
 import 'package:the_task/services/task_service.dart';
 
@@ -28,7 +29,6 @@ class TaskCurrentService
   Future<void> init() async {
     final task = await _taskService.getActiveOrNullAsync();
     _task = ReactiveValue<Task?>(task);
-    listenToReactiveValues([_task]);
 
     TaskCurrentState state;
     switch (task?.state) {
@@ -42,9 +42,17 @@ class TaskCurrentService
         state = TaskCurrentState.none;
     }
     _state = ReactiveValue<TaskCurrentState>(state);
+    listenToReactiveValues([_task, _state]);
   }
 
   Future<void> createAsync() async {
+    if (locator<GoalService>().goals.isEmpty) {
+      _logger.i('No goals available, skipping task creation');
+      _state.value = TaskCurrentState.none;
+      _task.value = null;
+      return;
+    }
+
     _state.value = TaskCurrentState.creating;
     try {
       final task = await locator<TaskCreateService>().createAsync();

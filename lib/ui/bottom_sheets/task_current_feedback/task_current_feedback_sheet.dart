@@ -52,7 +52,7 @@ class TaskCurrentFeedbackSheet
                   SheetResponse(confirmed: true),
                 ),
               ),
-              verticalSpaceLarge,
+              verticalSpaceMedium,
             ],
           ),
         ),

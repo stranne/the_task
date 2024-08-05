@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/ui/common/ui_helpers.dart';
 
 import 'goal_list_empty_model.dart';
 
@@ -12,13 +13,10 @@ class GoalListEmpty extends StackedView<GoalListEmptyModel> {
     GoalListEmptyModel viewModel,
     Widget? child,
   ) {
-    return const Center(
+    return Center(
       child: Text(
         'No goals found',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
+        style: emptyContentTextStyle,
       ),
     );
   }

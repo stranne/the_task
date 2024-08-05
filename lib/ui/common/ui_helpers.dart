@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const double _tinySize = 5.0;
 const double _smallSize = 10.0;
@@ -76,3 +77,8 @@ double getResponsiveFontSize(BuildContext context,
 
   return responsiveSize;
 }
+
+final emptyContentTextStyle = GoogleFonts.nunito(
+  fontWeight: FontWeight.w600,
+  fontSize: 20.0,
+);

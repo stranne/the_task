@@ -19,9 +19,15 @@ class ProgressTaskListItem extends StackedView<ProgressTaskListItemModel> {
     Widget? child,
   ) {
     return ListTile(
-      title: Text(task.title),
+      title: Text(
+        task.title,
+        style: const TextStyle(
+          fontWeight: FontWeight.w600,
+        ),
+      ),
       subtitle: Text(viewModel.getSubtitle(task)),
       onTap: () => viewModel.navigateToTaskAsync(task),
+      isThreeLine: true,
     );
   }
 

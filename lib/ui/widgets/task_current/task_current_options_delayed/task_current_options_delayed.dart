@@ -5,6 +5,8 @@ import 'task_current_options_delayed_model.dart';
 
 class TaskCurrentOptionsDelayed
     extends StackedView<TaskCurrentOptionsDelayedModel> {
+  static const Duration delayDuration = Duration(seconds: 20);
+
   final Widget child;
 
   const TaskCurrentOptionsDelayed({
@@ -31,7 +33,7 @@ class TaskCurrentOptionsDelayed
               duration: const Duration(milliseconds: 200),
               opacity: viewModel.shouldDelay ? 1.0 : 0.0,
               child: TweenAnimationBuilder<double>(
-                duration: const Duration(seconds: 5),
+                duration: delayDuration,
                 tween: Tween<double>(begin: 0.0, end: 1.0),
                 onEnd: viewModel.done,
                 builder: (context, value, _) => LinearProgressIndicator(

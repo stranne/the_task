@@ -17,6 +17,7 @@ class HomeView extends StackedView<HomeViewModel> {
   ) {
     return DefaultTabController(
       length: 3,
+      initialIndex: viewModel.initialIndex,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('The Task'),

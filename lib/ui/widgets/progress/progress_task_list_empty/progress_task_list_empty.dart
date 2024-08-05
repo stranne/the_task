@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/ui/common/ui_helpers.dart';
 
 import 'progress_task_list_empty_model.dart';
 
@@ -12,13 +13,10 @@ class ProgressTaskListEmpty extends StackedView<ProgressTaskListEmptyModel> {
     ProgressTaskListEmptyModel viewModel,
     Widget? child,
   ) {
-    return const Center(
+    return Center(
       child: Text(
         'No tasks found',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
+        style: emptyContentTextStyle,
       ),
     );
   }

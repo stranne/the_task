@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:the_task/ui/common/ui_helpers.dart';
 import 'package:the_task/ui/widgets/task_current/task_current_layout/task_current_layout.dart';
 
 import 'task_current_none_model.dart';
@@ -21,13 +22,10 @@ class TaskCurrentNone extends StackedView<TaskCurrentNoneModel> {
         ),
       ],
       scrollable: false,
-      child: const Center(
+      child: Center(
         child: Text(
           'No current task',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+          style: emptyContentTextStyle,
         ),
       ),
     );

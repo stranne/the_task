@@ -24,6 +24,10 @@ class TaskItem extends StackedView<TaskItemModel> {
   ) {
     final goal = task.goal.target;
     final feedback = task.feedback.target;
+    final sectionHeaderStyle = emptyContentTextStyle.copyWith(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w800,
+    );
 
     return SizedBox(
       width: double.infinity,
@@ -34,37 +38,39 @@ class TaskItem extends StackedView<TaskItemModel> {
           if (!hideTitle) ...[
             Text(
               task.title,
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
               textAlign: TextAlign.center,
             ),
             verticalSpaceMedium,
           ],
           Text(
-            'Description',
-            style: Theme.of(context).textTheme.bodySmall,
+            'Description'.toUpperCase(),
+            style: sectionHeaderStyle,
             textAlign: TextAlign.center,
           ),
           Text(task.description),
           verticalSpaceMedium,
           if (goal != null) ...[
             Text(
-              'Goal',
-              style: Theme.of(context).textTheme.bodySmall,
+              'Goal'.toUpperCase(),
+              style: sectionHeaderStyle,
               textAlign: TextAlign.center,
             ),
             Text(goal.title),
             verticalSpaceMedium,
           ],
           Text(
-            'Why',
-            style: Theme.of(context).textTheme.bodySmall,
+            'Why'.toUpperCase(),
+            style: sectionHeaderStyle,
             textAlign: TextAlign.center,
           ),
           Text(task.why),
           verticalSpaceMedium,
           Text(
-            'Step-by-step',
-            style: Theme.of(context).textTheme.bodySmall,
+            'Step-by-step'.toUpperCase(),
+            style: sectionHeaderStyle,
             textAlign: TextAlign.center,
           ),
           OrderedList(
@@ -74,11 +80,12 @@ class TaskItem extends StackedView<TaskItemModel> {
                 )
                 .toList(),
           ),
-          if (feedback != null) ...[
+          if (feedback != null &&
+              (feedback.typeIds.isNotEmpty || feedback.comment != null)) ...[
             verticalSpaceMedium,
             Text(
-              'Feedback',
-              style: Theme.of(context).textTheme.bodySmall,
+              'Feedback'.toUpperCase(),
+              style: sectionHeaderStyle,
               textAlign: TextAlign.center,
             ),
             OrderedList(

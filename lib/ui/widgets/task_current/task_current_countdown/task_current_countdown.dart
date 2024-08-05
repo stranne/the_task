@@ -31,11 +31,11 @@ class TaskCurrentCountdown extends StackedView<TaskCurrentCountdownModel> {
   Color getColor(double progress) {
     switch (progress) {
       case >= 0.7 && < 1:
-        return Colors.yellow;
+        return const Color(0xFFFED766);
       case 1:
-        return Colors.red;
+        return const Color(0xFF971919);
       default:
-        return Colors.green;
+        return const Color(0xFF139A43);
     }
   }
 }

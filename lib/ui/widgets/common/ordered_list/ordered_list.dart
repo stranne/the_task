@@ -25,12 +25,17 @@ class OrderedList extends StackedView<OrderedListModel> {
       children: items
           .map(
             (item) => ListTile(
-              dense: true,
               leading: Text(
                 '${items.indexOf(item) + 1}',
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
-              title: item,
+              title: DefaultTextStyle(
+                style: Theme.of(context).textTheme.bodyMedium!,
+                child: item,
+              ),
+              visualDensity: VisualDensity.compact,
             ),
           )
           .toList(),

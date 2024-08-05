@@ -30,6 +30,7 @@ class GoalList extends StackedView<GoalListModel> {
         onPressed: () {
           viewModel.addGoal();
         },
+        tooltip: 'Add goal',
         child: const Icon(Icons.add),
       ),
     );

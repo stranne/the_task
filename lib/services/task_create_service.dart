@@ -89,17 +89,12 @@ Previous tasks (latest to oldest):
 ${tasksLatest20.map(_createPromptTaskItem).join('\n')}
 '''
         .trim();
-
-/*
-TO ADD?
-* Users current locale: 
-* Current weather: 
-* Current location:   */
   }
 
   String _createPromptTaskItem(Task task) => '''
 - ${task.title}
   - State: ${_taskStateService.toText(task.state)}
+  - Created: ${task.created}
 ${_createPromptTaskItemFeedback(task)}
 '''
       .trim();
