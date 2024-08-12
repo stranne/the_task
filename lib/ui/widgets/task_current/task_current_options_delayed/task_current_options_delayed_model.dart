@@ -16,7 +16,7 @@ class TaskCurrentOptionsDelayedModel extends ReactiveViewModel {
   (Duration delay, bool shouldDelay) getDuration(DateTime? shouldDelayTo) {
     final delay = shouldDelayTo?.difference(DateTime.now());
 
-    return (delay == null || delay.inMilliseconds <= 0)
+    return (delay == null || delay.inMilliseconds <= 1000)
         ? (const Duration(microseconds: 1), false)
         : (delay, true);
   }
