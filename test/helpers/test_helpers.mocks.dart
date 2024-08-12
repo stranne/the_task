@@ -1097,6 +1097,16 @@ class MockTaskService extends _i1.Mock implements _i16.TaskService {
       ) as _i7.Future<void>);
 
   @override
+  _i7.Future<void> deleteAsync(_i3.Task? task) => (super.noSuchMethod(
+        Invocation.method(
+          #deleteAsync,
+          [task],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>
       super.noSuchMethod(
         Invocation.method(
