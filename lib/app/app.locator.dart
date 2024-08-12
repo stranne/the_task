@@ -60,6 +60,6 @@ Future<void> setupLocator({
 
   locator.registerLazySingleton(() => TaskCreateService());
   locator.registerLazySingleton(() => TaskFeedbackService());
-  locator.registerLazySingleton(() => TaskCurrentOptionsDelayedService());
+  locator.registerSingleton(TaskCurrentOptionsDelayedService());
   locator.registerSingleton(LocaleService());
 }

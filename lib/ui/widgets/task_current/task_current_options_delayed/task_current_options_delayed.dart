@@ -5,8 +5,6 @@ import 'task_current_options_delayed_model.dart';
 
 class TaskCurrentOptionsDelayed
     extends StackedView<TaskCurrentOptionsDelayedModel> {
-  static const Duration delayDuration = Duration(seconds: 20);
-
   final Widget child;
 
   const TaskCurrentOptionsDelayed({
@@ -20,24 +18,29 @@ class TaskCurrentOptionsDelayed
     TaskCurrentOptionsDelayedModel viewModel,
     Widget? child,
   ) {
+    final (delay, shouldDelay) = viewModel.getDuration(viewModel.shouldDelayTo);
+
     return Stack(
       children: [
         IgnorePointer(
-          ignoring: viewModel.shouldDelay,
+          ignoring: shouldDelay,
           child: this.child,
         ),
         Positioned.fill(
           child: IgnorePointer(
-            ignoring: !viewModel.shouldDelay,
+            ignoring: !shouldDelay,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 200),
-              opacity: viewModel.shouldDelay ? 1.0 : 0.0,
+              opacity: shouldDelay ? 1.0 : 0.0,
               child: TweenAnimationBuilder<double>(
-                duration: delayDuration,
+                duration: delay,
                 tween: Tween<double>(begin: 0.0, end: 1.0),
-                onEnd: viewModel.done,
+                onEnd: () => viewModel.notifyListeners(),
                 builder: (context, value, _) => LinearProgressIndicator(
                   value: value,
+                  valueColor: AlwaysStoppedAnimation(
+                    Theme.of(context).colorScheme.primary.withAlpha(100),
+                  ),
                 ),
               ),
             ),

@@ -10,7 +10,14 @@ class TaskCurrentOptionsDelayedModel extends ReactiveViewModel {
   List<ListenableServiceMixin> get listenableServices =>
       [_taskCurrentOptionsDelayedService];
 
-  bool get shouldDelay => _taskCurrentOptionsDelayedService.shouldDelay;
+  DateTime? get shouldDelayTo =>
+      _taskCurrentOptionsDelayedService.shouldDelayTo;
 
-  void done() => _taskCurrentOptionsDelayedService.delayDone();
+  (Duration delay, bool shouldDelay) getDuration(DateTime? shouldDelayTo) {
+    final delay = shouldDelayTo?.difference(DateTime.now());
+
+    return (delay == null || delay.inMilliseconds <= 0)
+        ? (const Duration(microseconds: 1), false)
+        : (delay, true);
+  }
 }

@@ -45,7 +45,7 @@ class MainApp extends StatelessWidget {
 
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        brightness: brightness,
+        brightness: Brightness.light,
         seedColor: const Color(0xFF0FA3B1),
       ),
       textTheme: GoogleFonts.nunitoTextTheme(textTheme).copyWith(

@@ -1380,27 +1380,11 @@ class MockTaskCurrentCountdownService extends _i1.Mock
 class MockTaskCurrentOptionsDelayedService extends _i1.Mock
     implements _i25.TaskCurrentOptionsDelayedService {
   @override
-  bool get shouldDelay => (super.noSuchMethod(
-        Invocation.getter(#shouldDelay),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
-
-  @override
   int get listenersCount => (super.noSuchMethod(
         Invocation.getter(#listenersCount),
         returnValue: 0,
         returnValueForMissingStub: 0,
       ) as int);
-
-  @override
-  void delayDone() => super.noSuchMethod(
-        Invocation.method(
-          #delayDone,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 
   @override
   void listenToReactiveValues(List<dynamic>? reactiveValues) =>

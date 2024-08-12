@@ -45,7 +45,7 @@ import 'package:the_task/services/locale_service.dart';
     InitializableSingleton(classType: GoalService),
     LazySingleton(classType: TaskCreateService),
     LazySingleton(classType: TaskFeedbackService),
-    LazySingleton(classType: TaskCurrentOptionsDelayedService),
+    Singleton(classType: TaskCurrentOptionsDelayedService),
     Singleton(classType: LocaleService),
 // @stacked-service
   ],
