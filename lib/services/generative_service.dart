@@ -3,9 +3,10 @@ import 'package:the_task/app/app.logger.dart';
 
 class GenerativeService {
   final _logger = getLogger('GenerativeService');
+  static const apiKey = String.fromEnvironment("GEMININE_API_KEY");
   final GenerativeModel model = GenerativeModel(
     model: 'gemini-1.5-flash-latest',
-    apiKey: const String.fromEnvironment("GEMININE_API_KEY"),
+    apiKey: apiKey
   );
 
   Future<String> generateAsync(String systemPrompt, String userPrompt) async {

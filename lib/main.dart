@@ -5,14 +5,22 @@ import 'package:the_task/app/app.dialogs.dart';
 import 'package:the_task/app/app.locator.dart';
 import 'package:the_task/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:the_task/services/generative_service.dart';
 
 Future<void> main() async {
+  _validateEnvironment();
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   setupDialogUi();
   setupBottomSheetUi();
 
   runApp(const MainApp());
+}
+
+void _validateEnvironment() {
+  if (GenerativeService.apiKey.isEmpty) {
+    throw Exception('API key is not set. Please set it in the environment.');
+  }
 }
 
 class MainApp extends StatelessWidget {
@@ -37,7 +45,7 @@ class MainApp extends StatelessWidget {
 
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        brightness: Brightness.light,
+        brightness: brightness,
         seedColor: const Color(0xFF0FA3B1),
       ),
       textTheme: GoogleFonts.nunitoTextTheme(textTheme).copyWith(
