@@ -19,6 +19,20 @@ This app explores the integration of generative AI into a practical application.
 
 ## Instructions
 
-To run, you need to specify the Gemini API key to use by setting it with [dart define](https://dartcode.org/docs/using-dart-define-in-flutter/). You can acquire the API key [here](https://aistudio.google.com/app/apikey).
+This app is created with Flutter and Stacked CLI.
+
+* [Install Flutter](https://docs.flutter.dev/get-started/install) (required)
+* [Install Stacked CLI](https://stacked.filledstacks.com/docs/tooling/stacked-cli/) (optional)
+
+To run, you need to specify the Gemini API key to use by setting it with [dart define](https://dartcode.org/docs/using-dart-define-in-flutter/). You can acquire an API key [here](https://aistudio.google.com/app/apikey).
 
 ``--dart-define=GEMINI_API_KEY=...``
+
+## Screenshots
+
+|                        |                        |                        |
+|------------------------------|------------------------------|------------------------------|
+| ![Goal list](screenshots/1.png) | ![Edit goal](screenshots/2.png) | ![Current task - empty](screenshots/3.png) |
+| ![Current task - creating](screenshots/4.png) | ![Current task - delay decision](screenshots/5.png) | ![Current task - accept task](screenshots/6.png) |
+| ![Current task - work in progress](screenshots/7.png) | ![Current task - complete feedback](screenshots/8.png) | ![Current task - accept task 2](screenshots/9.png) |
+| ![Progress](screenshots/10.png) | ![Progress task details](screenshots/11.png) | |
